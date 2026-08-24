@@ -1,0 +1,357 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "name": "Green Valley",
+      "description": "Nagisa's peaceful little home.",
+      "theme": "village",
+      "levels": [
+        {
+          "id": 1,
+          "number": 1,
+          "title": "Welcome Home",
+          "difficulty": "A2",
+          "xp": 20,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Nagisa ___ coffee every morning.",
+              "options": [
+                "drink",
+                "drinks",
+                "drinking",
+                "drank"
+              ],
+              "answer": 1,
+              "explanation": "Use Present Simple for regular actions."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Я работаю дома».",
+              "answer": "I work at home.",
+              "explanation": "Use Present Simple for a regular situation."
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "number": 2,
+          "title": "The Angry Cat",
+          "difficulty": "A2",
+          "xp": 20,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Look! Nagisa ___ on the table.",
+              "options": [
+                "sleep",
+                "sleeps",
+                "is sleeping",
+                "slept"
+              ],
+              "answer": 2,
+              "explanation": "Present Continuous describes something happening now."
+            },
+            {
+              "type": "text",
+              "question": "Complete the sentence with the -ing form of ‘watch’.",
+              "sentence": "I am ___ TV right now.",
+              "answer": "watching",
+              "explanation": "Present Continuous = am/is/are + verb-ing."
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "number": 3,
+          "title": "Coffee Emergency",
+          "difficulty": "A2",
+          "xp": 20,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "How ___ coffee do we need?",
+              "options": [
+                "many",
+                "much",
+                "few",
+                "a"
+              ],
+              "answer": 1,
+              "explanation": "Coffee is uncountable, so we use 'much'."
+            },
+            {
+              "type": "listening",
+              "question": "What does Nagisa want?",
+              "audio_text": "I want some coffee, please.",
+              "options": [
+                "Coffee",
+                "Tea",
+                "Milk",
+                "Water"
+              ],
+              "answer": 0,
+              "explanation": "Nagisa says: I want some coffee, please."
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "number": 4,
+          "title": "Yesterday",
+          "difficulty": "A2",
+          "xp": 25,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Yesterday I ___ to the supermarket.",
+              "options": [
+                "go",
+                "went",
+                "gone",
+                "going"
+              ],
+              "answer": 1,
+              "explanation": "Use Past Simple for a finished action in the past."
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "number": 5,
+          "title": "The Missing Sandwich",
+          "difficulty": "A2",
+          "xp": 25,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "There ___ a sandwich on the table.",
+              "options": [
+                "is",
+                "are",
+                "be",
+                "were"
+              ],
+              "answer": 0,
+              "explanation": "Use 'there is' with one singular thing."
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "number": 6,
+          "title": "Rainy Morning",
+          "difficulty": "A2",
+          "xp": 25,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "It ___ raining now.",
+              "options": [
+                "is",
+                "are",
+                "does",
+                "was"
+              ],
+              "answer": 0,
+              "explanation": "Present Continuous uses 'is' with 'it'."
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "number": 7,
+          "title": "The Strange Neighbor",
+          "difficulty": "A2",
+          "xp": 30,
+          "boss": false,
+          "steps": [
+            {
+              "type": "text",
+              "question": "Complete the sentence with the Present Simple form of ‘live’.",
+              "sentence": "She ___ in a small house.",
+              "answer": "lives",
+              "explanation": "With she/he/it we usually add -s in Present Simple."
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "number": 8,
+          "title": "Dinner Disaster",
+          "difficulty": "A2",
+          "xp": 30,
+          "boss": false,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "We ___ dinner yesterday.",
+              "options": [
+                "cook",
+                "cooks",
+                "cooked",
+                "cooking"
+              ],
+              "answer": 2,
+              "explanation": "Yesterday indicates Past Simple."
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "number": 9,
+          "title": "Before the Boss",
+          "difficulty": "A2",
+          "xp": 35,
+          "boss": false,
+          "steps": [
+            {
+              "type": "translation",
+              "question": "Переведи: «Кошка сейчас спит».",
+              "answer": "The cat is sleeping now.",
+              "accepted_answers": [
+                "The cat is sleeping."
+              ],
+              "explanation": "Use Present Continuous for an action happening now."
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "number": 10,
+          "title": "Green Valley Boss",
+          "difficulty": "A2",
+          "xp": 100,
+          "boss": true,
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Nagisa ___ coffee every morning.",
+              "options": [
+                "drink",
+                "drinks",
+                "is drink",
+                "drinking"
+              ],
+              "answer": 1,
+              "explanation": "Present Simple with he/she/it uses -s."
+            },
+            {
+              "type": "choice",
+              "question": "Look! Nagisa ___ now.",
+              "options": [
+                "sleep",
+                "slept",
+                "is sleeping",
+                "sleeps"
+              ],
+              "answer": 2,
+              "explanation": "The action is happening now."
+            },
+            {
+              "type": "choice",
+              "question": "Yesterday I ___ home early.",
+              "options": [
+                "go",
+                "went",
+                "going",
+                "gone"
+              ],
+              "answer": 1,
+              "explanation": "Yesterday requires Past Simple."
+            },
+            {
+              "type": "text",
+              "question": "Complete the sentence with the -ing form of ‘learn’.",
+              "sentence": "I am ___ English.",
+              "answer": "learning",
+              "explanation": "Present Continuous uses verb-ing."
+            },
+            {
+              "type": "listening",
+              "question": "What does Nagisa want?",
+              "audio_text": "I want coffee.",
+              "options": [
+                "Coffee",
+                "Tea",
+                "Water",
+                "Juice"
+              ],
+              "answer": 0,
+              "explanation": "Nagisa says: I want coffee."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Cozy Town",
+      "description": "Cafés, shops and suspiciously friendly people.",
+      "theme": "town",
+      "levels": []
+    },
+    {
+      "id": 3,
+      "name": "Market Street",
+      "description": "Money, shopping and bad financial decisions.",
+      "theme": "market",
+      "levels": []
+    },
+    {
+      "id": 4,
+      "name": "Sunny Kitchen",
+      "description": "Recipes, ingredients and culinary disasters.",
+      "theme": "kitchen",
+      "levels": []
+    },
+    {
+      "id": 5,
+      "name": "Old Railway",
+      "description": "Trains, tickets and unexpected adventures.",
+      "theme": "railway",
+      "levels": []
+    },
+    {
+      "id": 6,
+      "name": "Business District",
+      "description": "Emails, meetings and office survival.",
+      "theme": "office",
+      "levels": []
+    },
+    {
+      "id": 7,
+      "name": "Big City",
+      "description": "Fast conversations and everyday problems.",
+      "theme": "city",
+      "levels": []
+    },
+    {
+      "id": 8,
+      "name": "Cat Kingdom",
+      "description": "Nothing here makes sense. Especially the cats.",
+      "theme": "cats",
+      "levels": []
+    },
+    {
+      "id": 9,
+      "name": "Lost World",
+      "description": "Complex situations and advanced English.",
+      "theme": "adventure",
+      "levels": []
+    },
+    {
+      "id": 10,
+      "name": "The Final Journey",
+      "description": "The road to C1.",
+      "theme": "final",
+      "levels": []
+    }
+  ]
+}

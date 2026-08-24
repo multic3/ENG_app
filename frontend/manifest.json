@@ -1,0 +1,11 @@
+{
+  "name": "English RPG",
+  "short_name": "English RPG",
+  "description": "Learn English by playing with Nagisa.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#c8edff",
+  "theme_color": "#f7edd0",
+  "orientation": "portrait"
+}

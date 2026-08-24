@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Local environments
+.venv/
+venv/
+backend/venv/
+
+# Runtime data: never commit player progress
+backend/data/*.db
+backend/data/*.db-*
+backend/data/*.bak
+
+# Runtime logs
+*.log
+backend/out.log
+backend/err.log
+backend/server_out.log
+backend/server_err.log
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment secrets
+.env
+.env.*
+!.env.example

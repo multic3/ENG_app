@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f7edd0"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="English RPG"
+    >
+
+    <link
+        rel="manifest"
+        href="/static/manifest.json"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/styles.css"
+    >
+
+    <title>English RPG</title>
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <section
+        id="loginScreen"
+        class="login-screen"
+        aria-labelledby="loginTitle"
+    >
+        <form id="loginForm" class="login-card">
+            <img
+                class="nagisa-sprite login-nagisa"
+                src="/static/assets/nagisa-pixel.png"
+                alt="Nagisa"
+            >
+
+            <div class="login-eyebrow">PLAYER CHECK-IN</div>
+            <h1 id="loginTitle">Welcome to Green Valley!</h1>
+            <p>
+                Enter your private player ID and name.
+                Your progress is linked to this ID.
+            </p>
+
+            <label class="login-label" for="loginPlayerId">
+                Player ID
+            </label>
+            <input
+                id="loginPlayerId"
+                class="login-input"
+                name="player_id"
+                type="text"
+                minlength="4"
+                maxlength="32"
+                pattern="[A-Za-z0-9_-]+"
+                autocomplete="username"
+                placeholder="Example: anya_2026"
+                required
+            >
+
+            <label class="login-label" for="loginPlayerName">
+                Player name
+            </label>
+            <input
+                id="loginPlayerName"
+                class="login-input"
+                name="player_name"
+                type="text"
+                maxlength="40"
+                autocomplete="nickname"
+                placeholder="Anya is a princess"
+                required
+            >
+
+            <div id="loginError" class="login-error" role="alert"></div>
+
+            <button class="primary-button login-button" type="submit">
+                Enter the game
+            </button>
+
+            <p class="login-note">
+                Keep your ID private — for this MVP it works like a password.
+            </p>
+        </form>
+    </section>
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <header class="game-header">
+
+        <div class="header-left">
+
+            <button
+                class="avatar-button"
+                id="avatarButton"
+                aria-label="Player profile"
+            >
+                <img
+                    class="nagisa-sprite nagisa-avatar"
+                    src="/static/assets/nagisa-pixel.png"
+                    alt="Nagisa"
+                >
+            </button>
+
+            <div class="player-info">
+
+                <div class="player-title-row">
+
+                    <div
+                        id="playerName"
+                        class="player-name"
+                    >
+                        Anya is a princess
+                    </div>
+
+                    <div
+                        id="playerLevel"
+                        class="player-level"
+                    >
+                        LV 1
+                    </div>
+
+                </div>
+
+                <div class="xp-row">
+
+                    <div class="xp-bar">
+
+                        <div
+                            id="xpFill"
+                            class="xp-fill"
+                        ></div>
+
+                    </div>
+
+                    <span id="xpText">
+                        0 / 40 XP
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div
+                id="streak"
+                class="stat-pill"
+            >
+                🔥 1
+            </div>
+
+            <div
+                id="hearts"
+                class="stat-pill hearts-pill"
+            >
+                ❤️❤️❤️❤️❤️
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         APP CONTENT
+    ========================== -->
+
+    <main>
+
+        <!-- =====================
+             MAP
+        ====================== -->
+
+        <section
+            id="mapScreen"
+            class="screen active"
+        >
+
+            <div class="location-header">
+
+                <div>
+
+                    <div
+                        id="locationLabel"
+                        class="location-label"
+                    >
+                        LOCATION 1
+                    </div>
+
+                    <h1 id="locationName">
+                        Green Valley
+                    </h1>
+
+                    <p
+                        id="locationDescription"
+                        class="location-description"
+                    >
+                        Nagisa's peaceful little home.
+                    </p>
+
+                </div>
+
+                <div class="location-progress-box">
+
+                    <div
+                        id="locationProgress"
+                        class="location-progress"
+                    >
+                        0 / 10
+                    </div>
+
+                    <div class="location-progress-label">
+                        completed
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="world-selector">
+
+                <button
+                    id="prevLocation"
+                    class="world-arrow"
+                    aria-label="Previous location"
+                >
+                    ←
+                </button>
+
+                <div
+                    id="worldTitle"
+                    class="world-title"
+                >
+                    Green Valley
+                </div>
+
+                <button
+                    id="nextLocation"
+                    class="world-arrow"
+                    aria-label="Next location"
+                >
+                    →
+                </button>
+
+            </div>
+
+
+            <div
+                id="map"
+                class="game-map"
+            >
+
+                <div
+                    id="mapBackground"
+                    class="map-background"
+                >
+
+                    <div class="sun"></div>
+
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+
+                    <div class="tree tree-1">
+                        🌳
+                    </div>
+
+                    <div class="tree tree-2">
+                        🌲
+                    </div>
+
+                    <div class="tree tree-3">
+                        🌳
+                    </div>
+
+                    <div class="tree tree-4">
+                        🌲
+                    </div>
+
+                    <div class="tree tree-5">
+                        🌳
+                    </div>
+
+                    <div class="rock rock-1">
+                        🪨
+                    </div>
+
+                    <div class="rock rock-2">
+                        🪨
+                    </div>
+
+                    <div class="water water-1"></div>
+
+                    <svg
+                        class="path-svg"
+                        viewBox="0 0 400 900"
+                        preserveAspectRatio="none"
+                    >
+
+                        <path
+                            d="
+                                M200 828
+                                C160 805 130 780 136 738
+                                C142 690 115 665 136 639
+                                C170 600 230 600 240 558
+                                C250 520 285 495 260 459
+                                C235 425 190 445 172 405
+                                C150 365 145 330 168 306
+                                C190 280 220 285 232 252
+                                C244 215 210 190 220 153
+                                C225 115 205 90 200 63
+                            "
+                        />
+
+                    </svg>
+
+
+                    <div
+                        id="levelNodes"
+                        class="level-nodes"
+                    ></div>
+
+
+                    <div
+                        id="mapNagisa"
+                        class="map-nagisa"
+                    >
+                        <img
+                            class="nagisa-sprite nagisa-map-sprite"
+                            src="/static/assets/nagisa-pixel.png"
+                            alt="Nagisa"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================
+             LESSON
+        ====================== -->
+
+        <section
+            id="lessonScreen"
+            class="screen"
+        >
+
+            <div class="lesson-header">
+
+                <button
+                    id="backToMap"
+                    class="icon-button"
+                    aria-label="Back to world map"
+                >
+                    ←
+                </button>
+
+
+                <div class="lesson-header-center">
+
+                    <div
+                        id="lessonLocation"
+                        class="lesson-location"
+                    >
+                        Green Valley
+                    </div>
+
+                    <div
+                        id="lessonProgress"
+                        class="lesson-progress"
+                    >
+                        1 / 5
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="lessonHearts"
+                    class="lesson-hearts"
+                >
+                    ❤️❤️❤️❤️❤️
+                </div>
+
+            </div>
+
+
+            <div class="lesson-progress-track">
+
+                <div
+                    id="lessonProgressFill"
+                    class="lesson-progress-fill"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="bossBanner"
+                class="boss-banner hidden"
+            >
+
+                <div class="boss-icon">
+                    👑
+                </div>
+
+                <div>
+
+                    <div class="boss-title">
+                        BOSS BATTLE
+                    </div>
+
+                    <div class="boss-description">
+                        Defeat Nagisa's challenge.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nagisa-area">
+
+                <div class="nagisa-bubble">
+
+                    <span id="nagisaText">
+                        Let's do this!
+                    </span>
+
+                </div>
+
+                <div
+                    id="nagisaCharacter"
+                    class="nagisa-character"
+                >
+                    <img
+                        class="nagisa-sprite nagisa-lesson-sprite"
+                        src="/static/assets/nagisa-pixel.png"
+                        alt="Nagisa"
+                    >
+                </div>
+
+            </div>
+
+
+            <div
+                id="lessonCard"
+                class="lesson-card"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         COMPLETE MODAL
+    ========================== -->
+
+    <div
+        id="completeModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <div
+                id="resultEmoji"
+                class="modal-cat"
+            >
+                😺
+            </div>
+
+            <div
+                id="resultLabel"
+                class="result-label"
+            >
+                LEVEL COMPLETE
+            </div>
+
+            <h2 id="resultTitle">
+                Nice job!
+            </h2>
+
+            <div
+                id="resultScore"
+                class="result-score"
+            >
+                4 / 5
+            </div>
+
+            <div
+                id="resultRank"
+                class="result-rank"
+            >
+                A
+            </div>
+
+            <div
+                id="rewardText"
+                class="reward-text"
+            >
+                +20 XP
+            </div>
+
+            <button
+                id="continueButton"
+                class="primary-button"
+            >
+                Continue
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         NO HEARTS MODAL
+    ========================== -->
+
+    <div
+        id="noHeartsModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <div class="modal-cat">
+                😵
+            </div>
+
+            <div class="result-label">
+                NO HEARTS
+            </div>
+
+            <h2>
+                Nagisa says stop.
+            </h2>
+
+            <p class="modal-text">
+                Take a short break and refill your hearts.
+            </p>
+
+            <button
+                id="restoreHeartsButton"
+                class="primary-button"
+            >
+                Restore Hearts
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script src="/static/lesson-engine.js"></script>
+<script src="/static/map-engine.js"></script>
+<script src="/static/audio-engine.js"></script>
+<script src="/static/app.js"></script>
+
+<script>
+
+    if ("serviceWorker" in navigator) {
+
+        window.addEventListener(
+            "load",
+            () => {
+
+                navigator.serviceWorker.register(
+                    "/sw.js",
+                    {
+                        scope: "/"
+                    }
+                );
+
+            }
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
