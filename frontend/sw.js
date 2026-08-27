@@ -1,5 +1,5 @@
 const CACHE_NAME =
-    "english-rpg-v11";
+    "english-rpg-v13";
 
 
 const APP_FILES = [

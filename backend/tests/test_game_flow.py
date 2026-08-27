@@ -1,3 +1,4 @@
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -30,6 +31,23 @@ class GameFlowTests(unittest.TestCase):
 
     def unlock_green_valley_boss(self):
         for level_id in range(1, 10):
+            main.finish_level(
+                level_id,
+                database.DEFAULT_PLAYER_ID,
+            )
+
+    def unlock_sunny_beach_boss(self):
+        self.unlock_green_valley_boss()
+        main.finish_boss(
+            10,
+            main.BossResultRequest(
+                correct_answers=5,
+                total_answers=5,
+            ),
+            database.DEFAULT_PLAYER_ID,
+        )
+
+        for level_id in range(11, 20):
             main.finish_level(
                 level_id,
                 database.DEFAULT_PLAYER_ID,
@@ -104,7 +122,7 @@ class GameFlowTests(unittest.TestCase):
             422,
         )
 
-    def test_last_available_level_does_not_unlock_missing_content(self):
+    def test_green_valley_boss_unlocks_sunny_beach(self):
         self.unlock_green_valley_boss()
 
         result = main.finish_boss(
@@ -116,15 +134,57 @@ class GameFlowTests(unittest.TestCase):
             database.DEFAULT_PLAYER_ID,
         )
 
-        self.assertIsNone(
-            result["next_level"]
+        self.assertEqual(
+            result["next_level"],
+            11,
         )
         self.assertEqual(
             result["progress"]["current_level"],
-            10,
+            11,
         )
         self.assertIn(
             10,
+            result["progress"]["completed_levels"],
+        )
+
+    def test_existing_boss_completion_unlocks_new_content(self):
+        database.complete_level(
+            10,
+            0,
+            None,
+        )
+
+        self.assertEqual(
+            database.get_progress()["current_level"],
+            10,
+        )
+
+        database.advance_past_completed_levels(20)
+
+        self.assertEqual(
+            database.get_progress()["current_level"],
+            11,
+        )
+
+    def test_last_available_level_does_not_unlock_missing_content(self):
+        self.unlock_sunny_beach_boss()
+
+        result = main.finish_boss(
+            20,
+            main.BossResultRequest(
+                correct_answers=8,
+                total_answers=8,
+            ),
+            database.DEFAULT_PLAYER_ID,
+        )
+
+        self.assertIsNone(result["next_level"])
+        self.assertEqual(
+            result["progress"]["current_level"],
+            20,
+        )
+        self.assertIn(
+            20,
             result["progress"]["completed_levels"],
         )
 
@@ -244,7 +304,7 @@ class GameFlowTests(unittest.TestCase):
         )
 
     def test_fill_gap_steps_include_sentence_and_verb_cue(self):
-        for level_id in (2, 7, 10):
+        for level_id in (2, 7, 10, 12, 15, 16, 20):
             level = main.find_level(
                 main.GAME_DATA,
                 level_id,
@@ -258,6 +318,51 @@ class GameFlowTests(unittest.TestCase):
             for step in text_steps:
                 self.assertIn("___", step["sentence"])
                 self.assertIn("form of", step["question"])
+
+    def test_available_levels_are_contiguous_and_documented(self):
+        levels = [
+            level
+            for location in main.GAME_DATA["locations"]
+            for level in location.get("levels", [])
+        ]
+
+        self.assertEqual(
+            [level["id"] for level in levels],
+            list(range(1, 21)),
+        )
+
+        for level in levels:
+            self.assertIn("grammar_help", level)
+            self.assertGreaterEqual(len(level["steps"]), 1)
+
+        self.assertTrue(levels[9]["boss"])
+        self.assertTrue(levels[19]["boss"])
+
+    def test_second_location_is_sunny_beach(self):
+        location = main.GAME_DATA["locations"][1]
+
+        self.assertEqual(location["name"], "Sunny Beach")
+        self.assertEqual(location["theme"], "beach")
+        self.assertEqual(len(location["levels"]), 10)
+
+    def test_english_prompts_have_russian_translations(self):
+        for location in main.GAME_DATA["locations"]:
+            for level in location.get("levels", []):
+                for step in level["steps"]:
+                    if not re.search(
+                        r"[А-Яа-яЁё]",
+                        step["question"],
+                    ):
+                        self.assertTrue(
+                            step.get("question_translation"),
+                            f"Missing question translation in level {level['id']}",
+                        )
+
+                    if step.get("sentence"):
+                        self.assertTrue(
+                            step.get("sentence_translation"),
+                            f"Missing sentence translation in level {level['id']}",
+                        )
 
 
 if __name__ == "__main__":

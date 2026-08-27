@@ -94,10 +94,44 @@ if (
 }
 
 
+const nagisaAtLevel11 =
+    context.mapEngine.getNagisaPosition(
+        {id: 2},
+        {current_level: 11}
+    );
+
+const nagisaAtLevel16 =
+    context.mapEngine.getNagisaPosition(
+        {id: 2},
+        {current_level: 16}
+    );
+
+
+if (
+    nagisaAtLevel11.level !== 11 ||
+    nagisaAtLevel16.level !== 16 ||
+    (
+        nagisaAtLevel11.x === nagisaAtLevel16.x &&
+        nagisaAtLevel11.y === nagisaAtLevel16.y
+    )
+) {
+    throw new Error(
+        "Nagisa does not move with lesson progress"
+    );
+}
+
+
 const roadPath = fs.readFileSync(
     "frontend/index.html",
     "utf8"
 );
+
+
+if (!roadPath.includes("beach-decoration")) {
+    throw new Error(
+        "Sunny Beach map decorations are missing"
+    );
+}
 
 for (
     const position of context.mapEngine.positions
@@ -117,5 +151,5 @@ for (
 
 
 console.log(
-    "OK map displays global levels 1-100"
+    "OK map displays levels 11-20, beach theme and moving Nagisa"
 );

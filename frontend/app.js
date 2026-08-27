@@ -52,6 +52,16 @@ const elements = {
             "mapScreen"
         ),
 
+    mapBackground:
+        document.getElementById(
+            "mapBackground"
+        ),
+
+    mapNagisa:
+        document.getElementById(
+            "mapNagisa"
+        ),
+
     lessonScreen:
         document.getElementById(
             "lessonScreen"
@@ -390,7 +400,12 @@ async function enterPlayerSession(
     );
 
     renderHeader();
-    openLocation(1);
+    openLocation(
+        Math.ceil(
+            state.game.progress
+                .current_level / 10
+        )
+    );
 
 }
 
@@ -646,6 +661,12 @@ function renderLocation() {
         location.name;
 
 
+    elements.mapBackground.className =
+        `map-background theme-${
+            location.theme || "default"
+        }`;
+
+
     elements.previousLocation.disabled =
         location.id <= 1;
 
@@ -675,6 +696,28 @@ function renderLocation() {
         location,
         state.game.progress,
         openLevel
+    );
+
+
+    const nagisaPosition =
+        MapEngine.getNagisaPosition(
+            location,
+            state.game.progress
+        );
+
+
+    elements.mapNagisa.style.left =
+        `${nagisaPosition.x}%`;
+
+    elements.mapNagisa.style.top =
+        `${nagisaPosition.y}%`;
+
+    elements.mapNagisa.style.bottom =
+        "auto";
+
+    elements.mapNagisa.setAttribute(
+        "aria-label",
+        `Nagisa is near level ${nagisaPosition.level}`
     );
 
 }
@@ -878,6 +921,118 @@ async function openLevel(
    LESSON
 =================================== */
 
+let activeTranslationPopover = null;
+let translationHideTimer = null;
+
+
+function hideTranslationPopover() {
+
+    if (translationHideTimer) {
+        clearTimeout(
+            translationHideTimer
+        );
+
+        translationHideTimer = null;
+    }
+
+
+    activeTranslationPopover
+        ?.remove?.();
+
+    activeTranslationPopover = null;
+
+}
+
+
+function makeTranslatable(
+    element,
+    translation
+) {
+
+    if (!translation) {
+        return;
+    }
+
+
+    element.classList.add(
+        "translatable-phrase"
+    );
+
+    element.setAttribute(
+        "tabindex",
+        "0"
+    );
+
+    element.setAttribute(
+        "aria-label",
+        `${element.textContent}. Нажмите, чтобы увидеть перевод.`
+    );
+
+
+    const showTranslation = event => {
+
+        event?.preventDefault?.();
+        event?.stopPropagation?.();
+
+
+        if (
+            activeTranslationPopover
+                ?.parentElement === element
+        ) {
+            hideTranslationPopover();
+            return;
+        }
+
+
+        hideTranslationPopover();
+
+
+        const popover =
+            document.createElement(
+                "span"
+            );
+
+        popover.className =
+            "translation-popover";
+
+        popover.textContent =
+            translation;
+
+        element.appendChild(popover);
+
+        activeTranslationPopover =
+            popover;
+
+        translationHideTimer =
+            setTimeout(
+                hideTranslationPopover,
+                3500
+            );
+
+    };
+
+
+    element.addEventListener(
+        "click",
+        showTranslation
+    );
+
+    element.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+                showTranslation(event);
+            }
+
+        }
+    );
+
+}
+
 function renderLesson() {
 
     const step =
@@ -911,6 +1066,9 @@ function renderLesson() {
             (number - 1)
             / total
         ) * 100}%`;
+
+
+    hideTranslationPopover();
 
 
     elements.lessonCard.innerHTML =
@@ -1016,6 +1174,11 @@ function renderChoice(
 
     question.textContent =
         step.question;
+
+    makeTranslatable(
+        question,
+        step.question_translation
+    );
 
 
     elements.lessonCard.appendChild(
@@ -1169,6 +1332,11 @@ function renderText(
     question.textContent =
         step.question;
 
+    makeTranslatable(
+        question,
+        step.question_translation
+    );
+
 
     elements.lessonCard.appendChild(
         question
@@ -1189,6 +1357,11 @@ function renderText(
 
         sentence.textContent =
             step.sentence;
+
+        makeTranslatable(
+            sentence,
+            step.sentence_translation
+        );
 
 
         elements.lessonCard.appendChild(
@@ -1324,6 +1497,11 @@ function renderTranslation(
 
     question.textContent =
         step.question;
+
+    makeTranslatable(
+        question,
+        step.question_translation
+    );
 
 
     elements.lessonCard.appendChild(
@@ -1550,6 +1728,11 @@ function renderListening(
     question.textContent =
         step.question;
 
+    makeTranslatable(
+        question,
+        step.question_translation
+    );
+
 
     elements.lessonCard.appendChild(
         question
@@ -1728,6 +1911,11 @@ function renderSpeaking(
     question.textContent =
         step.question;
 
+    makeTranslatable(
+        question,
+        step.question_translation
+    );
+
 
     wrapper.appendChild(
         question
@@ -1746,6 +1934,11 @@ function renderSpeaking(
 
     target.textContent =
         step.phrase;
+
+    makeTranslatable(
+        target,
+        step.phrase_translation
+    );
 
 
     wrapper.appendChild(
@@ -2947,8 +3140,17 @@ function closeLesson() {
         );
 
 
+    const progressLocationId =
+        Math.ceil(
+            state.game.progress
+                .current_level / 10
+        );
+
+
     openLocation(
-        state.currentLocation.id
+        getLocation(progressLocationId)
+            ? progressLocationId
+            : state.currentLocation.id
     );
 
 

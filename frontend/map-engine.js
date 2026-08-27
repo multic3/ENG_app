@@ -14,6 +14,43 @@ const MapEngine = {
     ],
 
 
+    getNagisaPosition(
+        location,
+        progress
+    ) {
+
+        const startLevel =
+            ((location.id - 1) * 10) + 1;
+
+        const currentLevel =
+            progress.current_level || 1;
+
+        const localIndex = Math.min(
+            9,
+            Math.max(
+                0,
+                currentLevel - startLevel
+            )
+        );
+
+        const levelPosition =
+            this.positions[localIndex];
+
+        const sideOffset =
+            levelPosition.x >= 50
+                ? -11
+                : 11;
+
+
+        return {
+            x: levelPosition.x + sideOffset,
+            y: levelPosition.y,
+            level: startLevel + localIndex
+        };
+
+    },
+
+
     render(
         container,
         location,

@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from .database import (
+    advance_past_completed_levels,
     check_database,
     clamp_current_level,
     complete_level,
@@ -153,6 +154,9 @@ def startup():
     clamp_current_level(
         get_highest_available_level_id()
     )
+    advance_past_completed_levels(
+        get_highest_available_level_id()
+    )
     progress = get_progress()
     ensure_minimum_xp_for_level(
         progress["current_level"]
@@ -189,6 +193,10 @@ def create_player_session(
 
     player = upsert_player(player_id, name)
     clamp_current_level(
+        get_highest_available_level_id(),
+        player_id,
+    )
+    advance_past_completed_levels(
         get_highest_available_level_id(),
         player_id,
     )

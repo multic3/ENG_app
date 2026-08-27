@@ -1455,6 +1455,89 @@ input:focus-visible {
 }
 
 
+.beach-decoration {
+    display: none;
+}
+
+
+.map-background.theme-beach {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, .12) 50%,
+            transparent 50%
+        ) 0 0 / 18px 18px,
+        linear-gradient(
+            180deg,
+            #75d7ee 0 19%,
+            #46b9d1 19% 34%,
+            #8ce0e5 34% 43%,
+            #f4d68a 43% 100%
+        );
+}
+
+
+.map-background.theme-beach .tree,
+.map-background.theme-beach .rock,
+.map-background.theme-beach .water {
+    display: none;
+}
+
+
+.map-background.theme-beach .beach-decoration {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    filter: drop-shadow(3px 4px 0 rgba(75, 55, 35, .25));
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+
+.beach-palm {
+    font-size: 44px;
+}
+
+
+.beach-palm-1 {
+    top: 310px;
+    left: 18px;
+}
+
+
+.beach-palm-2 {
+    right: 20px;
+    bottom: 80px;
+}
+
+
+.beach-umbrella {
+    top: 405px;
+    right: 24px;
+    font-size: 38px;
+}
+
+
+.beach-shell {
+    bottom: 210px;
+    left: 35px;
+    font-size: 27px;
+}
+
+
+.beach-ball {
+    top: 585px;
+    right: 52px;
+    font-size: 25px;
+}
+
+
+.map-background.theme-beach .path-svg path {
+    stroke: #e8bb70;
+    filter: drop-shadow(0 4px 0 #b57b45);
+}
+
+
 .sun {
     position: absolute;
     top: 34px;
@@ -1615,7 +1698,10 @@ input:focus-visible {
     left: 50%;
     bottom: 7px;
     z-index: 4;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    transition:
+        left .35s steps(4, end),
+        top .35s steps(4, end);
     animation: catMapIdle 1.8s steps(2, end) infinite;
 }
 
@@ -1628,11 +1714,14 @@ input:focus-visible {
 
 @keyframes catMapIdle {
     0%, 100% {
-        transform: translate(-50%, 0);
+        transform: translate(-50%, -50%);
     }
 
     50% {
-        transform: translate(-50%, -4px);
+        transform: translate(
+            -50%,
+            calc(-50% - 4px)
+        );
     }
 }
 
@@ -1874,6 +1963,76 @@ input:focus-visible {
 .lesson-question {
     font-family: Arial, sans-serif;
     font-weight: 800;
+}
+
+
+.translatable-phrase {
+    position: relative;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: #4f91a5;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    cursor: help;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.translatable-phrase:focus-visible {
+    outline: 3px solid var(--pixel-gold);
+    outline-offset: 5px;
+}
+
+
+.translation-popover {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    z-index: 80;
+    display: block;
+    width: max-content;
+    max-width: min(310px, calc(100vw - 72px));
+    padding: 9px 11px;
+    transform: translateX(-50%);
+    color: #fff8dc;
+    background: #4e342e;
+    border: 3px solid var(--pixel-ink);
+    border-radius: 3px;
+    box-shadow: 0 5px 0 rgba(45, 32, 27, .42);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    pointer-events: none;
+    animation: translationAppear .16s steps(2, end);
+}
+
+
+.translation-popover::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    border-right: 7px solid transparent;
+    border-bottom: 8px solid var(--pixel-ink);
+    border-left: 7px solid transparent;
+    transform: translateX(-50%);
+}
+
+
+@keyframes translationAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }
 
 

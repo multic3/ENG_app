@@ -29,6 +29,7 @@
             {
               "type": "choice",
               "question": "Nagisa ___ coffee every morning.",
+              "question_translation": "Нагиса ___ кофе каждое утро.",
               "options": [
                 "drink",
                 "drinks",
@@ -69,6 +70,7 @@
             {
               "type": "choice",
               "question": "Look! Nagisa ___ on the table.",
+              "question_translation": "Смотри! Нагиса ___ на столе.",
               "options": [
                 "sleep",
                 "sleeps",
@@ -81,7 +83,9 @@
             {
               "type": "text",
               "question": "Complete the sentence with the -ing form of ‘watch’.",
+              "question_translation": "Заполни предложение формой глагола watch с окончанием -ing.",
               "sentence": "I am ___ TV right now.",
+              "sentence_translation": "Я сейчас ___ телевизор.",
               "answer": "watching",
               "explanation": "Present Continuous = am/is/are + verb-ing."
             }
@@ -110,6 +114,7 @@
             {
               "type": "choice",
               "question": "How ___ coffee do we need?",
+              "question_translation": "Сколько кофе нам нужно?",
               "options": [
                 "many",
                 "much",
@@ -122,6 +127,7 @@
             {
               "type": "listening",
               "question": "What does Nagisa want?",
+              "question_translation": "Чего хочет Нагиса?",
               "audio_text": "I want some coffee, please.",
               "options": [
                 "Coffee",
@@ -157,6 +163,7 @@
             {
               "type": "choice",
               "question": "Yesterday I ___ to the supermarket.",
+              "question_translation": "Вчера я ___ в супермаркет.",
               "options": [
                 "go",
                 "went",
@@ -191,6 +198,7 @@
             {
               "type": "choice",
               "question": "There ___ a sandwich on the table.",
+              "question_translation": "На столе ___ бутерброд.",
               "options": [
                 "is",
                 "are",
@@ -225,6 +233,7 @@
             {
               "type": "choice",
               "question": "It ___ raining now.",
+              "question_translation": "Сейчас ___ дождь.",
               "options": [
                 "is",
                 "are",
@@ -259,7 +268,9 @@
             {
               "type": "text",
               "question": "Complete the sentence with the Present Simple form of ‘live’.",
+              "question_translation": "Заполни предложение формой Present Simple глагола live.",
               "sentence": "She ___ in a small house.",
+              "sentence_translation": "Она ___ в маленьком доме.",
               "answer": "lives",
               "explanation": "With she/he/it we usually add -s in Present Simple."
             }
@@ -288,6 +299,7 @@
             {
               "type": "choice",
               "question": "We ___ dinner yesterday.",
+              "question_translation": "Вчера мы ___ ужин.",
               "options": [
                 "cook",
                 "cooks",
@@ -353,6 +365,7 @@
             {
               "type": "choice",
               "question": "Nagisa ___ coffee every morning.",
+              "question_translation": "Нагиса ___ кофе каждое утро.",
               "options": [
                 "drink",
                 "drinks",
@@ -365,6 +378,7 @@
             {
               "type": "choice",
               "question": "Look! Nagisa ___ now.",
+              "question_translation": "Смотри! Нагиса сейчас ___.",
               "options": [
                 "sleep",
                 "slept",
@@ -377,6 +391,7 @@
             {
               "type": "choice",
               "question": "Yesterday I ___ home early.",
+              "question_translation": "Вчера я рано ___ домой.",
               "options": [
                 "go",
                 "went",
@@ -389,13 +404,16 @@
             {
               "type": "text",
               "question": "Complete the sentence with the -ing form of ‘learn’.",
+              "question_translation": "Заполни предложение формой глагола learn с окончанием -ing.",
               "sentence": "I am ___ English.",
+              "sentence_translation": "Я сейчас ___ английский.",
               "answer": "learning",
               "explanation": "Present Continuous uses verb-ing."
             },
             {
               "type": "listening",
               "question": "What does Nagisa want?",
+              "question_translation": "Чего хочет Нагиса?",
               "audio_text": "I want coffee.",
               "options": [
                 "Coffee",
@@ -412,10 +430,443 @@
     },
     {
       "id": 2,
-      "name": "Cozy Town",
-      "description": "Cafés, shops and suspiciously friendly people.",
-      "theme": "town",
-      "levels": []
+      "name": "Sunny Beach",
+      "description": "Sea, sunshine and Nagisa's suspicious beach plans.",
+      "theme": "beach",
+      "levels": [
+        {
+          "id": 11,
+          "number": 1,
+          "title": "Can We Swim?",
+          "difficulty": "A2",
+          "xp": 35,
+          "boss": false,
+          "grammar_help": {
+            "title": "Can / can't — умения",
+            "summary": "Can говорит об умении или возможности, а can't — о том, что действие невозможно.",
+            "rules": [
+              "После can и can't используем глагол без to и без окончаний.",
+              "Форма can одинакова со всеми местоимениями: I can, she can, they can."
+            ],
+            "examples": [
+              {"en": "I can swim.", "ru": "Я умею плавать."},
+              {"en": "Nagisa can't surf.", "ru": "Нагиса не умеет кататься на сёрфе."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Nagisa ___ swim, but she dislikes cold water.",
+              "question_translation": "Нагиса ___ плавать, но она не любит холодную воду.",
+              "options": ["can", "cans", "is can", "can to"],
+              "answer": 0,
+              "explanation": "After can, use the base form of the verb: can swim."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Я умею плавать».",
+              "answer": "I can swim.",
+              "explanation": "Can + base verb describes an ability."
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "number": 2,
+          "title": "Beach Rules",
+          "difficulty": "A2",
+          "xp": 35,
+          "boss": false,
+          "grammar_help": {
+            "title": "Повелительное наклонение",
+            "summary": "Императив используют для инструкций, просьб и правил.",
+            "rules": [
+              "Утвердительная команда начинается с обычной формы глагола: Stay here.",
+              "Для запрета ставим don't перед глаголом: Don't run."
+            ],
+            "examples": [
+              {"en": "Use sunscreen.", "ru": "Используй солнцезащитный крем."},
+              {"en": "Don't touch the jellyfish.", "ru": "Не трогай медузу."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "___ on the wet rocks. They are dangerous.",
+              "question_translation": "___ по мокрым камням. Они опасны.",
+              "options": ["Not run", "Don't run", "Doesn't run", "No running to"],
+              "answer": 1,
+              "explanation": "A negative imperative uses don't + base verb."
+            },
+            {
+              "type": "text",
+              "question": "Complete with the negative imperative form of ‘touch’.",
+              "question_translation": "Заполни отрицательной повелительной формой глагола touch.",
+              "sentence": "___ the jellyfish.",
+              "sentence_translation": "___ медузу.",
+              "answer": "Don't touch",
+              "accepted_answers": ["Do not touch"],
+              "explanation": "Use don't + touch to make a prohibition."
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "number": 3,
+          "title": "Where Is My Towel?",
+          "difficulty": "A2",
+          "xp": 40,
+          "boss": false,
+          "grammar_help": {
+            "title": "Предлоги места",
+            "summary": "Предлоги показывают, где один предмет находится относительно другого.",
+            "rules": [
+              "In — внутри, on — на поверхности, under — под предметом.",
+              "Next to означает «рядом с», а between — «между»."
+            ],
+            "examples": [
+              {"en": "The towel is under the umbrella.", "ru": "Полотенце находится под зонтом."},
+              {"en": "The bag is next to Nagisa.", "ru": "Сумка находится рядом с Нагисой."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "The towel is ___ the beach umbrella.",
+              "question_translation": "Полотенце находится ___ пляжным зонтом.",
+              "options": ["under", "between", "inside of", "at"],
+              "answer": 0,
+              "explanation": "Under means that something is below another object."
+            },
+            {
+              "type": "listening",
+              "question": "Where is the towel?",
+              "question_translation": "Где находится полотенце?",
+              "audio_text": "The towel is next to the blue bag.",
+              "options": ["Under the bag", "Next to the bag", "In the bag", "Behind Nagisa"],
+              "answer": 1,
+              "explanation": "The sentence says: The towel is next to the blue bag."
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "number": 4,
+          "title": "Beach Café",
+          "difficulty": "A2",
+          "xp": 40,
+          "boss": false,
+          "grammar_help": {
+            "title": "Some / any",
+            "summary": "Some и any обозначают неопределённое количество.",
+            "rules": [
+              "Some обычно используем в утвердительных предложениях и в вежливых предложениях.",
+              "Any чаще встречается в вопросах и отрицаниях."
+            ],
+            "examples": [
+              {"en": "I want some ice cream.", "ru": "Я хочу немного мороженого."},
+              {"en": "Do you have any cold water?", "ru": "У вас есть холодная вода?"}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Do you have ___ cold water?",
+              "question_translation": "У вас есть холодная вода?",
+              "options": ["some", "any", "many", "a"],
+              "answer": 1,
+              "explanation": "Use any in most questions about an unknown amount."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Я хочу немного мороженого».",
+              "answer": "I want some ice cream.",
+              "accepted_answers": ["I'd like some ice cream.", "I would like some ice cream."],
+              "explanation": "Use some in an affirmative sentence with an uncountable noun."
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "number": 5,
+          "title": "Nagisa's Sunglasses",
+          "difficulty": "A2",
+          "xp": 45,
+          "boss": false,
+          "grammar_help": {
+            "title": "Притяжательные формы",
+            "summary": "Притяжательные прилагательные и местоимения показывают, кому принадлежит предмет.",
+            "rules": [
+              "Перед существительным используем my, your, his, her, our, their.",
+              "Без существительного используем mine, yours, his, hers, ours, theirs."
+            ],
+            "examples": [
+              {"en": "This is our umbrella.", "ru": "Это наш зонт."},
+              {"en": "The sunglasses are hers.", "ru": "Эти солнечные очки — её."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "These are Nagisa's sunglasses. They are ___.",
+              "question_translation": "Это солнечные очки Нагисы. Они — ___.",
+              "options": ["her", "hers", "she", "their"],
+              "answer": 1,
+              "explanation": "Hers replaces her sunglasses, so no noun follows it."
+            },
+            {
+              "type": "text",
+              "question": "Complete with the possessive adjective form of ‘we’.",
+              "question_translation": "Заполни притяжательным прилагательным от we.",
+              "sentence": "This is ___ beach umbrella.",
+              "sentence_translation": "Это ___ пляжный зонт.",
+              "answer": "our",
+              "explanation": "Use our before a noun to show that it belongs to us."
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "number": 6,
+          "title": "Shell Competition",
+          "difficulty": "A2",
+          "xp": 45,
+          "boss": false,
+          "grammar_help": {
+            "title": "Сравнительные прилагательные",
+            "summary": "Comparative adjectives помогают сравнить два предмета или человека.",
+            "rules": [
+              "К коротким прилагательным обычно добавляем -er: small → smaller.",
+              "Перед длинными прилагательными ставим more: more beautiful. После сравнения часто идёт than."
+            ],
+            "examples": [
+              {"en": "This shell is bigger than that one.", "ru": "Эта ракушка больше той."},
+              {"en": "The sunset is more beautiful today.", "ru": "Сегодня закат красивее."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "This shell is ___ than that one.",
+              "question_translation": "Эта ракушка ___, чем та.",
+              "options": ["big", "bigger", "more big", "biggest"],
+              "answer": 1,
+              "explanation": "Double the final consonant and add -er: big → bigger."
+            },
+            {
+              "type": "text",
+              "question": "Complete with the comparative form of ‘beautiful’.",
+              "question_translation": "Заполни сравнительной формой прилагательного beautiful.",
+              "sentence": "This beach is ___ than the city beach.",
+              "sentence_translation": "Этот пляж ___, чем городской пляж.",
+              "answer": "more beautiful",
+              "explanation": "Use more before a long adjective."
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "number": 7,
+          "title": "Tomorrow's Picnic",
+          "difficulty": "A2",
+          "xp": 50,
+          "boss": false,
+          "grammar_help": {
+            "title": "Be going to — планы",
+            "summary": "Be going to используют для планов и намерений на будущее.",
+            "rules": [
+              "Формула: am / is / are + going to + обычная форма глагола.",
+              "Выбираем форму be по подлежащему: I am, she is, we are."
+            ],
+            "examples": [
+              {"en": "We are going to have a picnic.", "ru": "Мы собираемся устроить пикник."},
+              {"en": "She is going to buy juice.", "ru": "Она собирается купить сок."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "We ___ have a picnic tomorrow.",
+              "question_translation": "Мы ___ устроить пикник завтра.",
+              "options": ["going to", "are going to", "are go to", "will going"],
+              "answer": 1,
+              "explanation": "With we, use are going to + base verb."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Она собирается купить сок».",
+              "answer": "She is going to buy juice.",
+              "accepted_answers": ["She's going to buy juice."],
+              "explanation": "Use she is going to + buy for a future plan."
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "number": 8,
+          "title": "The Windy Day",
+          "difficulty": "A2",
+          "xp": 50,
+          "boss": false,
+          "grammar_help": {
+            "title": "Объектные местоимения",
+            "summary": "Object pronouns заменяют дополнение — того, на кого направлено действие.",
+            "rules": [
+              "После глагола используем me, you, him, her, it, us, them.",
+              "They превращается в them, а we — в us."
+            ],
+            "examples": [
+              {"en": "Nagisa watches them.", "ru": "Нагиса наблюдает за ними."},
+              {"en": "Please help me.", "ru": "Пожалуйста, помоги мне."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Nagisa sees the birds. She watches ___.",
+              "question_translation": "Нагиса видит птиц. Она наблюдает за ___.",
+              "options": ["they", "their", "them", "theirs"],
+              "answer": 2,
+              "explanation": "Use the object pronoun them after the verb watches."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Пожалуйста, помоги мне».",
+              "answer": "Please help me.",
+              "accepted_answers": ["Help me, please."],
+              "explanation": "Me is the object form of I."
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "number": 9,
+          "title": "Sunburn Trouble",
+          "difficulty": "A2",
+          "xp": 55,
+          "boss": false,
+          "grammar_help": {
+            "title": "Should / shouldn't — советы",
+            "summary": "Should используют, чтобы дать совет или сказать, что будет правильно сделать.",
+            "rules": [
+              "После should и shouldn't используем глагол без to.",
+              "Shouldn't означает, что действие лучше не делать."
+            ],
+            "examples": [
+              {"en": "You should use sunscreen.", "ru": "Тебе следует использовать солнцезащитный крем."},
+              {"en": "You shouldn't sit in the sun for long.", "ru": "Тебе не следует долго сидеть на солнце."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "The sun is very strong. You ___ use sunscreen.",
+              "question_translation": "Солнце очень сильное. Тебе ___ использовать солнцезащитный крем.",
+              "options": ["should", "should to", "are should", "shouldn't"],
+              "answer": 0,
+              "explanation": "Should + base verb gives advice."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Тебе не следует долго сидеть на солнце».",
+              "answer": "You shouldn't sit in the sun for a long time.",
+              "accepted_answers": [
+                "You should not sit in the sun for a long time.",
+                "You shouldn't sit in the sun for long.",
+                "You should not sit in the sun for long."
+              ],
+              "explanation": "Use shouldn't + base verb for negative advice."
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "number": 10,
+          "title": "Sunny Beach Boss",
+          "difficulty": "A2",
+          "xp": 150,
+          "boss": true,
+          "grammar_help": {
+            "title": "Повторение Sunny Beach",
+            "summary": "Босс проверяет все правила пляжной главы: умения, инструкции, расположение, количество, принадлежность, сравнения, планы, местоимения и советы.",
+            "rules": [
+              "После can, should, shouldn't и императива используем обычную форму глагола.",
+              "Следи за конструкциями целиком: be going to, more + adjective, some / any."
+            ],
+            "examples": [
+              {"en": "We can swim, but we shouldn't swim here.", "ru": "Мы умеем плавать, но нам не следует плавать здесь."},
+              {"en": "We are going to find a safer beach.", "ru": "Мы собираемся найти более безопасный пляж."}
+            ]
+          },
+          "steps": [
+            {
+              "type": "choice",
+              "question": "Nagisa ___ climb the palm tree.",
+              "question_translation": "Нагиса ___ забраться на пальму.",
+              "options": ["can", "cans", "can to", "is can"],
+              "answer": 0,
+              "explanation": "Use can + base verb."
+            },
+            {
+              "type": "choice",
+              "question": "___ your water bottle.",
+              "question_translation": "___ бутылку воды.",
+              "options": ["Not forget", "Don't forget", "Doesn't forget", "No forget"],
+              "answer": 1,
+              "explanation": "A negative imperative uses don't + base verb."
+            },
+            {
+              "type": "listening",
+              "question": "Where are the keys?",
+              "question_translation": "Где находятся ключи?",
+              "audio_text": "The keys are under the beach towel.",
+              "options": ["On the towel", "Under the towel", "In the sea", "Next to Nagisa"],
+              "answer": 1,
+              "explanation": "The speaker says that the keys are under the towel."
+            },
+            {
+              "type": "choice",
+              "question": "We don't have ___ juice left.",
+              "question_translation": "У нас совсем не осталось сока.",
+              "options": ["some", "any", "a", "many"],
+              "answer": 1,
+              "explanation": "Use any in a negative sentence."
+            },
+            {
+              "type": "choice",
+              "question": "This towel belongs to her. It is ___.",
+              "question_translation": "Это полотенце принадлежит ей. Оно — ___.",
+              "options": ["her", "hers", "she", "their"],
+              "answer": 1,
+              "explanation": "Hers is a possessive pronoun used without a noun."
+            },
+            {
+              "type": "text",
+              "question": "Complete with the comparative form of ‘hot’.",
+              "question_translation": "Заполни сравнительной формой прилагательного hot.",
+              "sentence": "Today is ___ than yesterday.",
+              "sentence_translation": "Сегодня ___, чем вчера.",
+              "answer": "hotter",
+              "explanation": "Double the final consonant and add -er: hot → hotter."
+            },
+            {
+              "type": "translation",
+              "question": "Переведи: «Мы собираемся купить воду».",
+              "answer": "We are going to buy water.",
+              "accepted_answers": ["We're going to buy water."],
+              "explanation": "Use we are going to + base verb for a plan."
+            },
+            {
+              "type": "choice",
+              "question": "You have a sunburn. You ___ rest in the shade.",
+              "question_translation": "У тебя солнечный ожог. Тебе ___ отдохнуть в тени.",
+              "options": ["should", "should to", "can to", "are going"],
+              "answer": 0,
+              "explanation": "Should + base verb gives advice."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 3,

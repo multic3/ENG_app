@@ -39,12 +39,34 @@ function makeElement() {
 
         appendChild(child) {
             child.parent = this;
+            child.parentElement = this;
             this.children.push(child);
             return child;
         },
 
+        remove() {
+            if (!this.parent) {
+                return;
+            }
+
+            this.parent.children =
+                this.parent.children.filter(
+                    child => child !== this
+                );
+            this.parent = null;
+            this.parentElement = null;
+        },
+
         addEventListener(type, listener) {
             listeners[type] = listener;
+        },
+
+        dispatch(type, event = {}) {
+            return listeners[type]?.({
+                preventDefault() {},
+                stopPropagation() {},
+                ...event
+            });
         },
 
         setAttribute(name, value) {
@@ -332,6 +354,36 @@ async function run() {
     );
 
     await context.openLevelForTest(1);
+
+    const translatableQuestion =
+        document.querySelectorAll(
+            ".translatable-phrase"
+        )[0];
+
+    if (!translatableQuestion) {
+        throw new Error(
+            "Lesson question is not marked as translatable"
+        );
+    }
+
+    translatableQuestion.dispatch("click");
+
+    const translationPopover =
+        document.querySelectorAll(
+            ".translation-popover"
+        )[0];
+
+    if (
+        !translationPopover ||
+        translationPopover.textContent !==
+            level.steps[0].question_translation
+    ) {
+        throw new Error(
+            "Question translation did not appear"
+        );
+    }
+
+    translatableQuestion.dispatch("click");
 
     const options =
         document.querySelectorAll(

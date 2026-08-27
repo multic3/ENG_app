@@ -17,8 +17,8 @@ const availableLevels = levelsData.locations
 
 assert.strictEqual(
     availableLevels.length,
-    10,
-    "The MVP should expose grammar help for levels 1-10"
+    20,
+    "The MVP should expose grammar help for levels 1-20"
 );
 
 
@@ -87,5 +87,5 @@ for (const size of [180, 192, 512, 1024]) {
 
 
 console.log(
-    "OK levels 1-10 have Russian grammar help and Nagisa icons"
+    "OK levels 1-20 have Russian grammar help and Nagisa icons"
 );

@@ -286,6 +286,56 @@ def clamp_current_level(
     connection.close()
 
 
+def advance_past_completed_levels(
+    highest_available_level: int,
+    player_id: str = DEFAULT_PLAYER_ID,
+):
+    connection = get_connection()
+    progress = connection.execute(
+        """
+        SELECT current_level
+        FROM player_progress
+        WHERE player_id = ?
+        """,
+        (player_id,),
+    ).fetchone()
+
+    if progress is None:
+        connection.close()
+        raise ValueError("Player not found")
+
+    completed = {
+        row["level_id"]
+        for row in connection.execute(
+            """
+            SELECT level_id
+            FROM completed_levels
+            WHERE player_id = ?
+            """,
+            (player_id,),
+        ).fetchall()
+    }
+
+    target_level = progress["current_level"]
+
+    while (
+        target_level in completed
+        and target_level < highest_available_level
+    ):
+        target_level += 1
+
+    connection.execute(
+        """
+        UPDATE player_progress
+        SET current_level = ?
+        WHERE player_id = ?
+        """,
+        (target_level, player_id),
+    )
+    connection.commit()
+    connection.close()
+
+
 def ensure_minimum_xp_for_level(
     level: int,
     player_id: str = DEFAULT_PLAYER_ID,
