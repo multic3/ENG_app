@@ -13,6 +13,18 @@
           "difficulty": "A2",
           "xp": 20,
           "boss": false,
+          "grammar_help": {
+            "title": "Present Simple — привычки",
+            "summary": "Используем Present Simple для регулярных действий, привычек и фактов.",
+            "rules": [
+              "С I, you, we, they используем обычную форму глагола.",
+              "С he, she, it к глаголу обычно добавляем -s или -es."
+            ],
+            "examples": [
+              {"en": "I work at home.", "ru": "Я работаю дома."},
+              {"en": "Nagisa drinks coffee every morning.", "ru": "Нагиса пьёт кофе каждое утро."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -41,6 +53,18 @@
           "difficulty": "A2",
           "xp": 20,
           "boss": false,
+          "grammar_help": {
+            "title": "Present Continuous — сейчас",
+            "summary": "Используем Present Continuous, когда действие происходит в момент речи или временно.",
+            "rules": [
+              "Формула: am / is / are + глагол с окончанием -ing.",
+              "Слово now необязательно, если из ситуации уже понятно, что действие происходит сейчас."
+            ],
+            "examples": [
+              {"en": "Nagisa is sleeping.", "ru": "Нагиса сейчас спит."},
+              {"en": "I am watching TV now.", "ru": "Я сейчас смотрю телевизор."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -70,6 +94,18 @@
           "difficulty": "A2",
           "xp": 20,
           "boss": false,
+          "grammar_help": {
+            "title": "Much, many и some",
+            "summary": "Выбор слова зависит от того, можно ли посчитать предметы по одному.",
+            "rules": [
+              "Many употребляем с исчисляемыми существительными во множественном числе.",
+              "Much — с неисчисляемыми существительными; some часто означает «немного» или «несколько»."
+            ],
+            "examples": [
+              {"en": "How much coffee do we need?", "ru": "Сколько кофе нам нужно?"},
+              {"en": "I want some coffee.", "ru": "Я хочу немного кофе."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -105,6 +141,18 @@
           "difficulty": "A2",
           "xp": 25,
           "boss": false,
+          "grammar_help": {
+            "title": "Past Simple — завершённое прошлое",
+            "summary": "Используем Past Simple для действий, которые завершились в прошлом.",
+            "rules": [
+              "У правильных глаголов добавляем -ed, а неправильные формы нужно запоминать.",
+              "Yesterday, last week и ago часто подсказывают Past Simple."
+            ],
+            "examples": [
+              {"en": "I went to the supermarket yesterday.", "ru": "Вчера я ходила в супермаркет."},
+              {"en": "Nagisa slept all day.", "ru": "Нагиса спала весь день."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -127,6 +175,18 @@
           "difficulty": "A2",
           "xp": 25,
           "boss": false,
+          "grammar_help": {
+            "title": "There is / There are",
+            "summary": "Эта конструкция сообщает, что кто-то или что-то где-то находится или существует.",
+            "rules": [
+              "There is используем с одним предметом или неисчисляемым существительным.",
+              "There are используем с несколькими предметами."
+            ],
+            "examples": [
+              {"en": "There is a sandwich on the table.", "ru": "На столе лежит бутерброд."},
+              {"en": "There are two cups in the kitchen.", "ru": "На кухне стоят две чашки."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -149,6 +209,18 @@
           "difficulty": "A2",
           "xp": 25,
           "boss": false,
+          "grammar_help": {
+            "title": "Present Continuous с it",
+            "summary": "Для текущего действия с местоимением it используем форму is.",
+            "rules": [
+              "Формула для it: it is + глагол-ing.",
+              "О погоде часто говорим: It is raining или It is snowing."
+            ],
+            "examples": [
+              {"en": "It is raining.", "ru": "Идёт дождь."},
+              {"en": "It is getting cold now.", "ru": "Сейчас становится холодно."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -171,6 +243,18 @@
           "difficulty": "A2",
           "xp": 30,
           "boss": false,
+          "grammar_help": {
+            "title": "Present Simple с he / she / it",
+            "summary": "В утвердительном предложении после he, she или it глагол меняет форму.",
+            "rules": [
+              "Обычно добавляем -s: live → lives, drink → drinks.",
+              "После -s, -sh, -ch, -x, -o обычно добавляем -es: watch → watches."
+            ],
+            "examples": [
+              {"en": "She lives in a small house.", "ru": "Она живёт в маленьком доме."},
+              {"en": "Nagisa watches birds.", "ru": "Нагиса наблюдает за птицами."}
+            ]
+          },
           "steps": [
             {
               "type": "text",
@@ -188,6 +272,18 @@
           "difficulty": "A2",
           "xp": 30,
           "boss": false,
+          "grammar_help": {
+            "title": "Past Simple правильных глаголов",
+            "summary": "У правильных глаголов форма прошедшего времени образуется с помощью -ed.",
+            "rules": [
+              "Обычно добавляем -ed: cook → cooked, work → worked.",
+              "Если глагол уже заканчивается на -e, добавляем только -d: live → lived."
+            ],
+            "examples": [
+              {"en": "We cooked dinner yesterday.", "ru": "Вчера мы приготовили ужин."},
+              {"en": "I worked at home last week.", "ru": "На прошлой неделе я работала дома."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",
@@ -210,6 +306,18 @@
           "difficulty": "A2",
           "xp": 35,
           "boss": false,
+          "grammar_help": {
+            "title": "Present Continuous в переводе",
+            "summary": "Русское настоящее время часто переводится как Present Continuous, если действие происходит прямо сейчас.",
+            "rules": [
+              "Сначала выбери am, is или are, затем добавь глагол с -ing.",
+              "Слово now можно добавить для ясности, но оно не обязательно."
+            ],
+            "examples": [
+              {"en": "The cat is sleeping.", "ru": "Кошка сейчас спит."},
+              {"en": "The cat is sleeping now.", "ru": "Кошка сейчас спит."}
+            ]
+          },
           "steps": [
             {
               "type": "translation",
@@ -229,6 +337,18 @@
           "difficulty": "A2",
           "xp": 100,
           "boss": true,
+          "grammar_help": {
+            "title": "Повторение перед боссом",
+            "summary": "Здесь встречаются правила всей Green Valley: Present Simple, Present Continuous, Past Simple и слова количества.",
+            "rules": [
+              "Привычка: Present Simple; действие сейчас: am / is / are + глагол-ing.",
+              "Завершённое действие в прошлом: Past Simple; с неисчисляемыми словами используем much."
+            ],
+            "examples": [
+              {"en": "Nagisa drinks coffee every morning.", "ru": "Нагиса пьёт кофе каждое утро."},
+              {"en": "Nagisa is sleeping now. Yesterday she played.", "ru": "Нагиса сейчас спит. Вчера она играла."}
+            ]
+          },
           "steps": [
             {
               "type": "choice",

@@ -222,6 +222,41 @@ const elements = {
             "restoreHeartsButton"
         ),
 
+    grammarHelpButton:
+        document.getElementById(
+            "grammarHelpButton"
+        ),
+
+    grammarHelpModal:
+        document.getElementById(
+            "grammarHelpModal"
+        ),
+
+    grammarHelpTitle:
+        document.getElementById(
+            "grammarHelpTitle"
+        ),
+
+    grammarHelpSummary:
+        document.getElementById(
+            "grammarHelpSummary"
+        ),
+
+    grammarHelpRules:
+        document.getElementById(
+            "grammarHelpRules"
+        ),
+
+    grammarHelpExamples:
+        document.getElementById(
+            "grammarHelpExamples"
+        ),
+
+    closeGrammarHelp:
+        document.getElementById(
+            "closeGrammarHelp"
+        ),
+
     backToMap:
         document.getElementById(
             "backToMap"
@@ -748,6 +783,22 @@ async function openLevel(
 
         state.currentLocation =
             data.location;
+
+
+        if (
+            state.currentLevel
+                .grammar_help
+        ) {
+            elements.grammarHelpButton
+                .classList.remove(
+                    "hidden"
+                );
+        } else {
+            elements.grammarHelpButton
+                .classList.add(
+                    "hidden"
+                );
+        }
 
 
         state.heartsSpentThisLevel =
@@ -2740,12 +2791,148 @@ function getResultTitle(
 
 
 /* ===================================
+   GRAMMAR HELP
+=================================== */
+
+function closeGrammarHelp() {
+
+    elements.grammarHelpModal
+        .classList.add(
+            "hidden"
+        );
+
+
+    elements.grammarHelpButton
+        .focus?.();
+
+}
+
+
+function openGrammarHelp() {
+
+    const help =
+        state.currentLevel
+            ?.grammar_help;
+
+
+    if (!help) {
+        return;
+    }
+
+
+    elements.grammarHelpTitle.textContent =
+        help.title;
+
+    elements.grammarHelpSummary.textContent =
+        help.summary;
+
+    elements.grammarHelpRules.innerHTML = "";
+    elements.grammarHelpExamples.innerHTML = "";
+
+
+    help.rules.forEach(
+        rule => {
+
+            const item =
+                document.createElement(
+                    "li"
+                );
+
+            item.textContent = rule;
+
+            elements.grammarHelpRules
+                .appendChild(item);
+
+        }
+    );
+
+
+    help.examples.forEach(
+        example => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            const english =
+                document.createElement(
+                    "div"
+                );
+
+            const russian =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "grammar-example";
+
+            english.className =
+                "grammar-example-en";
+
+            russian.className =
+                "grammar-example-ru";
+
+            english.textContent =
+                example.en;
+
+            russian.textContent =
+                example.ru;
+
+            card.appendChild(english);
+            card.appendChild(russian);
+
+            elements.grammarHelpExamples
+                .appendChild(card);
+
+        }
+    );
+
+
+    elements.grammarHelpModal
+        .classList.remove(
+            "hidden"
+        );
+
+
+    elements.closeGrammarHelp
+        .focus?.();
+
+}
+
+
+elements.grammarHelpButton.onclick =
+    openGrammarHelp;
+
+
+elements.closeGrammarHelp.onclick =
+    closeGrammarHelp;
+
+
+elements.grammarHelpModal.onclick =
+    event => {
+
+        if (
+            event.target ===
+            elements.grammarHelpModal
+        ) {
+            closeGrammarHelp();
+        }
+
+    };
+
+
+/* ===================================
    NAVIGATION
 =================================== */
 
 function closeLesson() {
 
     AudioEngine.stop();
+
+    closeGrammarHelp();
 
 
     elements.lessonScreen
