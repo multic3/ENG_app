@@ -26,6 +26,9 @@ assert.strictEqual(
     context.speechEngine.evaluate("anything", repeat).correct,
     false
 );
+assert.ok(
+    context.speechEngine.evaluate("anything", repeat).percentage < 75
+);
 assert.strictEqual(
     context.speechEngine.evaluate("Hello Mia nice to meet you", repeat).pronunciation_assessed,
     false
@@ -42,5 +45,20 @@ assert.strictEqual(
     context.speechEngine.evaluate("My name is Anya and I live in Russia", response).correct,
     true
 );
+
+const nameVariant = {
+    phrase: "Hello, Sofie. Nice to meet you.",
+    accepted_answers: ["Hello Sofie, nice to meet you"],
+    speech_settings: {
+        required_concepts: ["hello", "sofie", "nice", "meet"],
+        min_words: 5
+    }
+};
+const recognisedNameVariant = context.speechEngine.evaluate(
+    "Hello Sophi nice to meet you",
+    nameVariant
+);
+assert.strictEqual(recognisedNameVariant.correct, true);
+assert.ok(recognisedNameVariant.percentage >= 75);
 
 console.log("OK speech provider architecture and semantic answer checks");

@@ -47,6 +47,11 @@ const elements = {
             "avatarButton"
         ),
 
+    resetProgressButton:
+        document.getElementById(
+            "resetProgressButton"
+        ),
+
     mapScreen:
         document.getElementById(
             "mapScreen"
@@ -464,6 +469,43 @@ elements.loginForm.addEventListener(
 elements.avatarButton.addEventListener(
     "click",
     showLogin
+);
+
+
+elements.resetProgressButton.addEventListener(
+    "click",
+    async () => {
+        if (!state.game) return;
+        const confirmed = window.confirm(
+            "Ты уверен, что хочешь сбросить прогресс?"
+        );
+        if (!confirmed) return;
+
+        elements.resetProgressButton.disabled = true;
+        try {
+            const response = await apiFetch("/api/reset", {
+                method: "POST"
+            });
+            if (!response.ok) {
+                throw new Error("Progress reset failed.");
+            }
+            const data = await response.json();
+            state.game.progress = data.progress;
+            state.currentLevel = null;
+            state.currentLocationId = 1;
+            syncPlayerFromProgress();
+            elements.lessonScreen.classList.remove("active");
+            elements.mapScreen.classList.add("active");
+            elements.grammarHelpButton.classList.add("hidden");
+            openLocation(1);
+            showNagisa("Прогресс сброшен. Начинаем новое путешествие!");
+        } catch (error) {
+            console.error(error);
+            window.alert("Не удалось сбросить прогресс. Попробуйте ещё раз.");
+        } finally {
+            elements.resetProgressButton.disabled = false;
+        }
+    }
 );
 
 
@@ -1156,7 +1198,7 @@ function renderLesson() {
 
         case "speaking":
 
-            renderSpeechExercise(
+            renderSpeechExerciseV2(
                 step
             );
 
@@ -1903,6 +1945,222 @@ function renderListening(
 /* ===================================
    SPEAKING
 =================================== */
+
+function createSpeechRecorder(settings, transcriptElement, onRecorded) {
+    const controls = document.createElement("div");
+    controls.className = "speech-controls";
+
+    const startButton = document.createElement("button");
+    startButton.className = "speech-control-button speech-start";
+    startButton.textContent = "🎙 Start";
+
+    const stopButton = document.createElement("button");
+    stopButton.className = "speech-control-button speech-stop";
+    stopButton.textContent = "Stop";
+    stopButton.disabled = true;
+
+    const retryButton = document.createElement("button");
+    retryButton.className = "speech-control-button speech-retry hidden";
+    retryButton.textContent = "Record again";
+
+    controls.append(startButton, stopButton, retryButton);
+    let recording = false;
+    let spokenText = "";
+
+    const setIdle = () => {
+        recording = false;
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        startButton.classList.remove("recording");
+    };
+
+    const startRecording = () => {
+        if (recording) return;
+        recording = true;
+        spokenText = "";
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        retryButton.classList.add("hidden");
+        transcriptElement.textContent = "Listening…";
+
+        const started = SpeechEngine.start(settings, {
+            onStart: () => startButton.classList.add("recording"),
+            onTranscript: text => {
+                spokenText = text;
+                transcriptElement.textContent = text ? `“${text}”` : "Listening…";
+            },
+            onEnd: () => {
+                setIdle();
+                retryButton.classList.remove("hidden");
+                if (spokenText) onRecorded(spokenText);
+            },
+            onError: error => {
+                setIdle();
+                retryButton.classList.remove("hidden");
+                transcriptElement.textContent = `Microphone error: ${error}`;
+            }
+        });
+
+        if (!started) setIdle();
+    };
+
+    startButton.onclick = startRecording;
+    stopButton.onclick = () => {
+        if (recording) SpeechEngine.stop();
+    };
+    retryButton.onclick = () => {
+        if (!recording) startRecording();
+    };
+
+    return {
+        element: controls,
+        disable() {
+            recording = false;
+            startButton.disabled = true;
+            stopButton.disabled = true;
+            retryButton.disabled = true;
+        },
+        requireNewRecording() {
+            retryButton.classList.remove("hidden");
+        }
+    };
+}
+
+
+function renderSpeechExerciseV2(step) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "speaking-box";
+
+    const question = document.createElement("div");
+    question.className = "lesson-question";
+    question.textContent = step.question;
+    makeTranslatable(question, step.question_translation);
+    wrapper.appendChild(question);
+
+    const settings = step.speech_settings || {};
+    if (step.phrase && settings.show_model_before_attempt !== false) {
+        const target = document.createElement("div");
+        target.className = "lesson-subtext";
+        target.textContent = step.phrase;
+        makeTranslatable(target, step.phrase_translation);
+        wrapper.appendChild(target);
+        wrapper.appendChild(createSpeechButton(step.phrase, "Hear phrase"));
+    }
+
+    const transcript = document.createElement("div");
+    transcript.className = "speaking-transcript";
+    transcript.textContent = "Press Start and speak. Words and meaning are checked; pronunciation is not.";
+
+    const checkButton = document.createElement("button");
+    checkButton.className = "primary-button speech-check hidden";
+    checkButton.textContent = "Check answer";
+    let spokenText = "";
+
+    const recorder = createSpeechRecorder(settings, transcript, text => {
+        spokenText = text;
+        checkButton.classList.remove("hidden");
+    });
+
+    wrapper.appendChild(recorder.element);
+    wrapper.appendChild(transcript);
+    wrapper.appendChild(checkButton);
+    elements.lessonCard.appendChild(wrapper);
+
+    if (!SpeechEngine.isSupported()) {
+        recorder.disable();
+        transcript.textContent = "Voice recognition is unavailable on this device. Practice aloud and continue.";
+        const continueButton = document.createElement("button");
+        continueButton.className = "primary-button";
+        continueButton.textContent = "I practised aloud";
+        continueButton.onclick = () => {
+            if (!LessonEngine.skipCurrentStep()) return;
+            continueButton.disabled = true;
+            addExplanation(step, "Voice check skipped: this browser has no recognition provider.");
+            addNextButton();
+        };
+        wrapper.appendChild(continueButton);
+        return;
+    }
+
+    checkButton.onclick = async () => {
+        if (!spokenText || LessonEngine.answered) return;
+        const result = SpeechEngine.evaluate(spokenText, step);
+        LessonEngine.answerSpeakingResult(result.correct);
+        recorder.disable();
+        checkButton.disabled = true;
+        transcript.textContent = `“${spokenText}” — ${result.message}`;
+        if (result.correct) {
+            showNagisaCorrect();
+            playCorrectSound();
+            addExplanation(step, result.message);
+            addNextButton();
+        } else {
+            showNagisaWrong();
+            await spendHeart();
+            addExplanation(step, result.message);
+            addSpeechCorrectionTask(step);
+        }
+    };
+}
+
+
+function addSpeechCorrectionTask(step) {
+    const task = document.createElement("div");
+    task.className = "correction-task speech-correction-task";
+
+    const title = document.createElement("div");
+    title.className = "correction-title";
+    title.textContent = "Повтори правильный ответ голосом, чтобы продолжить:";
+    task.appendChild(title);
+
+    const model = step.phrase || step.accepted_answers?.[0] || "";
+    if (model) {
+        const phrase = document.createElement("div");
+        phrase.className = "lesson-subtext";
+        phrase.textContent = model;
+        task.appendChild(phrase);
+        task.appendChild(createSpeechButton(model, "Hear correction"));
+    }
+
+    const transcript = document.createElement("div");
+    transcript.className = "speaking-transcript";
+    transcript.textContent = "Запиши исправление голосом.";
+
+    const checkButton = document.createElement("button");
+    checkButton.className = "primary-button speech-check hidden";
+    checkButton.textContent = "Check correction";
+    let spokenText = "";
+    let completed = false;
+
+    const recorder = createSpeechRecorder(step.speech_settings || {}, transcript, text => {
+        spokenText = text;
+        checkButton.disabled = false;
+        checkButton.classList.remove("hidden");
+    });
+
+    checkButton.onclick = () => {
+        if (completed || !spokenText) return;
+        const result = SpeechEngine.evaluate(spokenText, step);
+        transcript.textContent = `“${spokenText}” — ${result.message}`;
+        if (!result.correct) {
+            checkButton.classList.add("hidden");
+            spokenText = "";
+            recorder.requireNewRecording();
+            return;
+        }
+        completed = true;
+        recorder.disable();
+        checkButton.disabled = true;
+        showNagisaCorrect();
+        playCorrectSound();
+        addNextButton();
+    };
+
+    task.appendChild(recorder.element);
+    task.appendChild(transcript);
+    task.appendChild(checkButton);
+    elements.lessonCard.appendChild(task);
+}
 
 function renderSpeechExercise(step) {
     const wrapper = document.createElement("div");

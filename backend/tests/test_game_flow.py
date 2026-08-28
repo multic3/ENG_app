@@ -145,6 +145,27 @@ class GameFlowTests(unittest.TestCase):
         self.assertEqual(progress["xp"], 321)
         self.assertEqual(progress["completed_levels"], list(range(1, 51)))
 
+    def test_reset_clears_all_player_progress_and_reviews(self):
+        attempt = main.ExerciseAttemptRequest(
+            exercise_id="L001-P01-E1",
+            correct=False,
+            grammar_tags=["to_be"],
+        )
+        main.finish_level(
+            1,
+            database.DEFAULT_PLAYER_ID,
+            main.CompletionRequest(attempts=[attempt]),
+        )
+        reset = main.reset_game(database.DEFAULT_PLAYER_ID)["progress"]
+        self.assertEqual(reset["current_level"], 1)
+        self.assertEqual(reset["xp"], 0)
+        self.assertEqual(reset["completed_levels"], [])
+        self.assertEqual(reset["hearts"], database.MAX_HEARTS)
+        self.assertEqual(
+            main.due_review_queue(100, database.DEFAULT_PLAYER_ID)["reviews"],
+            [],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

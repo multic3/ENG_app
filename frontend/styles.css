@@ -2175,17 +2175,69 @@ input:focus-visible {
 }
 
 .speech-controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
     margin: 12px 0;
 }
 
-.speech-controls .option-button {
-    width: auto;
-    min-width: 100px;
-    margin: 0;
+.reset-progress-button {
+    min-width: 61px;
+    padding: 4px 5px;
+    color: #fff5d6;
+    background: var(--pixel-red);
+    border: 3px solid var(--pixel-ink);
+    border-radius: 3px;
+    box-shadow: 0 2px 0 var(--pixel-wood-dark);
+    font-size: 8px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.reset-progress-button:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.speech-control-button {
+    min-width: 0;
+    min-height: 54px;
+    padding: 8px 5px;
+    color: var(--pixel-ink);
+    background: #fffaf0;
+    border: 4px solid var(--pixel-ink);
+    border-radius: 4px;
+    box-shadow:
+        inset -3px -3px 0 #e7d6ad,
+        0 4px 0 #8a6448;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.15;
+    cursor: pointer;
+}
+
+.speech-control-button.speech-start {
+    color: #fffdf0;
+    background: var(--pixel-red);
+    box-shadow:
+        inset -3px -3px 0 #a8403c,
+        0 4px 0 #702f2c;
+}
+
+.speech-control-button.recording {
+    background: #ff755f;
+    animation: audioPulse .55s steps(2, end) infinite;
+}
+
+.speech-control-button:disabled {
+    opacity: .48;
+    cursor: not-allowed;
+}
+
+.speech-retry.hidden,
+.speech-check.hidden {
+    display: none !important;
 }
 
 
@@ -2218,6 +2270,13 @@ input:focus-visible {
     background: rgba(255, 255, 255, .55);
     border-left: 4px solid var(--pixel-wood);
     font-family: Arial, sans-serif;
+}
+
+.speech-correction-task {
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(255, 249, 222, .9);
+    border: 4px solid var(--pixel-wood-dark);
 }
 
 
