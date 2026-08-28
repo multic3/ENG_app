@@ -6,19 +6,19 @@ const path = require("path");
 const root = path.resolve(__dirname, "../..");
 const levelsData = JSON.parse(
     fs.readFileSync(
-        path.join(root, "backend/app/levels.json"),
+        path.join(root, "backend/app/course_content.json"),
         "utf8"
     )
 );
 
 const availableLevels = levelsData.locations
-    .flatMap(location => location.levels);
+    .flatMap(location => location.points);
 
 
 assert.strictEqual(
     availableLevels.length,
-    20,
-    "The MVP should expose grammar help for levels 1-20"
+    100,
+    "The authored course should expose grammar help for all 100 points"
 );
 
 
@@ -87,5 +87,5 @@ for (const size of [180, 192, 512, 1024]) {
 
 
 console.log(
-    "OK levels 1-20 have Russian grammar help and Nagisa icons"
+    "OK points 1-100 have Russian grammar help and Nagisa icons"
 );

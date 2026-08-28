@@ -1,243 +1,114 @@
 const MapEngine = {
+    pointsPerLocation: 50,
 
-    positions: [
-        { x: 50, y: 92 },
-        { x: 34, y: 82 },
-        { x: 34, y: 71 },
-        { x: 60, y: 62 },
-        { x: 65, y: 51 },
-        { x: 43, y: 45 },
-        { x: 42, y: 34 },
-        { x: 58, y: 28 },
-        { x: 55, y: 17 },
-        { x: 50, y: 7 }
-    ],
-
-
-    getNagisaPosition(
-        location,
-        progress
-    ) {
-
-        const startLevel =
-            ((location.id - 1) * 10) + 1;
-
-        const currentLevel =
-            progress.current_level || 1;
-
-        const localIndex = Math.min(
-            9,
-            Math.max(
-                0,
-                currentLevel - startLevel
-            )
-        );
-
-        const levelPosition =
-            this.positions[localIndex];
-
-        const sideOffset =
-            levelPosition.x >= 50
-                ? -11
-                : 11;
-
-
+    positions: Array.from({ length: 50 }, (_, index) => {
+        const row = Math.floor(index / 5);
+        const slot = index % 5;
+        const xSlots = row % 2 === 0
+            ? [50, 34, 22, 34, 50]
+            : [50, 66, 78, 66, 50];
         return {
-            x: levelPosition.x + sideOffset,
-            y: levelPosition.y,
-            level: startLevel + localIndex
+            x: xSlots[slot],
+            y: 97 - (index * (94 / 49))
         };
+    }),
 
+    getNagisaPosition(location, progress) {
+        const startPoint =
+            ((location.id - 1) * this.pointsPerLocation) + 1;
+        const currentPoint = progress.current_level || 1;
+        const localIndex = Math.min(
+            this.pointsPerLocation - 1,
+            Math.max(0, currentPoint - startPoint)
+        );
+        const pointPosition = this.positions[localIndex];
+        return {
+            x: pointPosition.x + (pointPosition.x >= 50 ? -10 : 10),
+            y: pointPosition.y,
+            level: startPoint + localIndex
+        };
     },
 
+    addMapPath(container) {
+        const map = container.parentElement;
+        const width = map?.clientWidth || 400;
+        const height = map?.clientHeight || 2600;
+        const namespace = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(namespace, "svg");
+        const path = document.createElementNS(namespace, "polyline");
+        const points = this.positions
+            .map(position => (
+                `${position.x * width / 100},${position.y * height / 100}`
+            ))
+            .join(" ");
 
-    render(
-        container,
-        location,
-        progress,
-        onLevelClick
-    ) {
+        svg.classList.add("map-path-svg");
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+        svg.setAttribute("preserveAspectRatio", "none");
+        svg.setAttribute("aria-hidden", "true");
+        path.setAttribute("points", points);
+        svg.appendChild(path);
+        container.appendChild(svg);
+    },
 
+    addStageLabels(container) {
+        const labels = [
+            "1–10 · Знакомство",
+            "11–20 · Практика",
+            "21–30 · Контекст",
+            "31–40 · Самостоятельно",
+            "41–50 · Повторение"
+        ];
+        labels.forEach((text, stageIndex) => {
+            const label = document.createElement("span");
+            label.className = "map-stage-label";
+            label.textContent = text;
+            label.style.top = `${this.positions[stageIndex * 10].y}%`;
+            container.appendChild(label);
+        });
+    },
+
+    render(container, location, progress, onLevelClick) {
         container.innerHTML = "";
+        const completed = progress.completed_levels || [];
+        const currentPoint = progress.current_level || 1;
+        const startPoint = ((location.id - 1) * this.pointsPerLocation) + 1;
 
+        this.addMapPath(container);
+        this.addStageLabels(container);
 
-        const completed =
-            progress.completed_levels || [];
+        for (let index = 0; index < this.pointsPerLocation; index++) {
+            const localPoint = index + 1;
+            const globalPoint = startPoint + index;
+            const position = this.positions[index];
+            const node = document.createElement("button");
+            const completedPoint = completed.includes(globalPoint);
+            const current = globalPoint === currentPoint;
+            const unlocked = globalPoint <= currentPoint;
 
-
-        const currentLevel =
-            progress.current_level || 1;
-
-
-        for (
-            let index = 0;
-            index < 10;
-            index++
-        ) {
-
-            const localLevel =
-                index + 1;
-
-
-            const globalLevel =
-                (
-                    (location.id - 1) * 10
-                ) + localLevel;
-
-
-            const position =
-                this.positions[index];
-
-
-            const node =
-                document.createElement(
-                    "button"
-                );
-
-
-            node.className =
-                "level-node";
-
-
-            node.style.left =
-                `${position.x}%`;
-
-            node.style.top =
-                `${position.y}%`;
-
-
-            const completedLevel =
-                completed.includes(
-                    globalLevel
-                );
-
-
-            const current =
-                globalLevel ===
-                currentLevel;
-
-
-            const unlocked =
-                globalLevel <=
-                currentLevel;
-
-
-            if (
-                completedLevel
-            ) {
-
-                node.classList.add(
-                    "completed"
-                );
-
-            }
-
-
-            if (
-                current &&
-                !completedLevel
-            ) {
-
-                node.classList.add(
-                    "current"
-                );
-
-            }
-
-
-            if (!unlocked) {
-
-                node.classList.add(
-                    "locked"
-                );
-
-            }
-
-
+            node.className = "level-node";
+            node.style.left = `${position.x}%`;
+            node.style.top = `${position.y}%`;
+            if (completedPoint) node.classList.add("completed");
+            if (current && !completedPoint) node.classList.add("current");
+            if (!unlocked) node.classList.add("locked");
+            if (localPoint === this.pointsPerLocation) node.classList.add("boss");
             node.setAttribute(
                 "aria-label",
-                `Level ${globalLevel}${
-                    !unlocked
-                        ? ", locked"
-                        : completedLevel
-                            ? ", completed"
-                            : ""
-                }`
+                `Point ${globalPoint}${!unlocked ? ", locked" : completedPoint ? ", completed" : ""}`
             );
 
-
-            if (localLevel === 10) {
-
-                node.classList.add(
-                    "boss"
-                );
-
-            }
-
-
-            let icon = "";
-
-
-            if (localLevel === 10) {
-
-                icon = "👑";
-
-            } else if (
-                completedLevel
-            ) {
-
-                icon = "⭐";
-
-            } else if (
-                !unlocked
-            ) {
-
-                icon = "🔒";
-
-            }
-
-
+            const icon = localPoint === this.pointsPerLocation
+                ? "👑"
+                : completedPoint ? "⭐" : !unlocked ? "🔒" : "";
             node.innerHTML = `
-                <span class="level-number">
-                    ${globalLevel}
-                </span>
-
-                ${
-                    icon
-                        ? `
-                            <span
-                                class="level-icon"
-                            >
-                                ${icon}
-                            </span>
-                        `
-                        : ""
-                }
+                <span class="level-number">${localPoint}</span>
+                ${icon ? `<span class="level-icon">${icon}</span>` : ""}
             `;
-
-
             if (unlocked) {
-
-                node.addEventListener(
-                    "click",
-                    () => {
-
-                        onLevelClick(
-                            globalLevel
-                        );
-
-                    }
-                );
-
+                node.addEventListener("click", () => onLevelClick(globalPoint));
             }
-
-
-            container.appendChild(
-                node
-            );
-
+            container.appendChild(node);
         }
-
     }
-
 };

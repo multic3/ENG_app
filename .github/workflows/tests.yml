@@ -28,6 +28,13 @@ jobs:
         working-directory: backend
         run: python -m unittest discover -s tests -v
 
+      - name: Validate course content
+        run: >-
+          python scripts/validate_course.py
+          backend/app/curriculum.json
+          backend/app/course_content.json
+          --report docs/course-coverage.md
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:

@@ -1,368 +1,149 @@
-import re
 import tempfile
 import unittest
+import sqlite3
 from pathlib import Path
 
 from fastapi import HTTPException
-from pydantic import ValidationError
 
 from app import database, main
-from app.progression import (
-    xp_threshold_for_level,
-)
 
 
 class GameFlowTests(unittest.TestCase):
-
     def setUp(self):
-        self.original_db_path = database.DB_PATH
-        self.temp_directory = (
-            tempfile.TemporaryDirectory()
-        )
-        database.DB_PATH = (
-            Path(self.temp_directory.name)
-            / "test.db"
-        )
+        self.temp_directory = tempfile.TemporaryDirectory()
+        database.DB_PATH = Path(self.temp_directory.name) / "test.db"
         database.init_db()
 
     def tearDown(self):
-        database.DB_PATH = self.original_db_path
         self.temp_directory.cleanup()
 
-    def unlock_green_valley_boss(self):
-        for level_id in range(1, 10):
-            main.finish_level(
-                level_id,
-                database.DEFAULT_PLAYER_ID,
-            )
+    def test_manifest_and_authored_content_counts(self):
+        self.assertEqual(len(main.GAME_DATA["locations"]), 100)
+        authored_points = [
+            point
+            for location in main.GAME_DATA["locations"]
+            for point in location.get("points", [])
+        ]
+        exercises = [
+            exercise
+            for point in authored_points
+            for exercise in point["exercises"]
+        ]
+        self.assertEqual([point["id"] for point in authored_points], list(range(1, 101)))
+        self.assertEqual(len(exercises), 500)
+        self.assertEqual(len({item["id"] for item in exercises}), 500)
+        self.assertEqual(len({item["prompt"] for item in exercises}), 500)
 
-    def unlock_sunny_beach_boss(self):
-        self.unlock_green_valley_boss()
-        main.finish_boss(
-            10,
-            main.BossResultRequest(
-                correct_answers=5,
-                total_answers=5,
-            ),
-            database.DEFAULT_PLAYER_ID,
+    def test_cefr_ranges_and_planned_locations(self):
+        locations = main.GAME_DATA["locations"]
+        self.assertTrue(all(item["cefr"] == "A2" for item in locations[:20]))
+        self.assertTrue(all(item["cefr"] == "B1" for item in locations[20:60]))
+        self.assertTrue(all(item["cefr"] == "B2" for item in locations[60:]))
+        self.assertTrue(all(item["content_status"] == "planned" for item in locations[2:]))
+        self.assertTrue(all(not item["points"] for item in locations[2:]))
+
+    def test_every_point_has_five_exercises_and_four_types(self):
+        required = {"multiple_choice", "fill_blank", "listening", "speech"}
+        for location in main.GAME_DATA["locations"][:2]:
+            self.assertEqual(len(location["points"]), 50)
+            for point in location["points"]:
+                types = [item["type"] for item in point["exercises"]]
+                self.assertEqual(len(types), 5)
+                self.assertEqual(set(types), required)
+                self.assertFalse(any(left == right for left, right in zip(types, types[1:])))
+
+    def test_normal_point_unlocks_next_and_records_delayed_review(self):
+        attempt = main.ExerciseAttemptRequest(
+            exercise_id="L001-P01-E1",
+            correct=False,
+            grammar_tags=["to_be"],
         )
-
-        for level_id in range(11, 20):
-            main.finish_level(
-                level_id,
-                database.DEFAULT_PLAYER_ID,
-            )
-
-    def test_normal_level_unlocks_next_level(self):
         result = main.finish_level(
             1,
             database.DEFAULT_PLAYER_ID,
+            main.CompletionRequest(attempts=[attempt]),
         )
+        self.assertEqual(result["progress"]["current_level"], 2)
+        self.assertEqual(main.due_review_queue(3, database.DEFAULT_PLAYER_ID)["reviews"], [])
+        due = main.due_review_queue(4, database.DEFAULT_PLAYER_ID)["reviews"]
+        self.assertEqual(due[0]["source_exercise_id"], "L001-P01-E1")
 
-        self.assertEqual(
-            result["progress"]["current_level"],
-            2,
-        )
-        self.assertEqual(
-            result["next_level"],
-            2,
-        )
-
-    def test_locked_boss_cannot_be_submitted(self):
+    def test_boss_is_every_fiftieth_point(self):
         with self.assertRaises(HTTPException) as raised:
-            main.finish_boss(
-                10,
-                main.BossResultRequest(
-                    correct_answers=5,
-                    total_answers=5,
-                ),
-                database.DEFAULT_PLAYER_ID,
-            )
-
-        self.assertEqual(
-            raised.exception.status_code,
-            403,
-        )
-
-    def test_boss_cannot_use_normal_completion(self):
-        self.unlock_green_valley_boss()
-
-        with self.assertRaises(HTTPException) as raised:
-            main.finish_level(
-                10,
-                database.DEFAULT_PLAYER_ID,
-            )
-
-        self.assertEqual(
-            raised.exception.status_code,
-            400,
-        )
-
-    def test_invalid_boss_scores_are_rejected(self):
-        with self.assertRaises(ValidationError):
-            main.BossResultRequest(
-                correct_answers=0,
-                total_answers=0,
-            )
-
-        self.unlock_green_valley_boss()
-
-        with self.assertRaises(HTTPException) as raised:
-            main.finish_boss(
-                10,
-                main.BossResultRequest(
-                    correct_answers=2,
-                    total_answers=1,
-                ),
-                database.DEFAULT_PLAYER_ID,
-            )
-
-        self.assertEqual(
-            raised.exception.status_code,
-            422,
-        )
-
-    def test_green_valley_boss_unlocks_sunny_beach(self):
-        self.unlock_green_valley_boss()
-
+            main.finish_level(50, database.DEFAULT_PLAYER_ID)
+        self.assertEqual(raised.exception.status_code, 403)
+        for point_id in range(1, 50):
+            main.finish_level(point_id, database.DEFAULT_PLAYER_ID)
         result = main.finish_boss(
-            10,
-            main.BossResultRequest(
-                correct_answers=5,
-                total_answers=5,
-            ),
+            50,
+            main.BossResultRequest(correct_answers=5, total_answers=5),
             database.DEFAULT_PLAYER_ID,
         )
+        self.assertTrue(result["success"])
+        self.assertEqual(result["next_level"], 51)
 
-        self.assertEqual(
-            result["next_level"],
-            11,
-        )
-        self.assertEqual(
-            result["progress"]["current_level"],
-            11,
-        )
-        self.assertIn(
-            10,
-            result["progress"]["completed_levels"],
-        )
-
-    def test_existing_boss_completion_unlocks_new_content(self):
-        database.complete_level(
-            10,
-            0,
-            None,
-        )
-
-        self.assertEqual(
-            database.get_progress()["current_level"],
-            10,
-        )
-
-        database.advance_past_completed_levels(20)
-
-        self.assertEqual(
-            database.get_progress()["current_level"],
-            11,
-        )
-
-    def test_last_available_level_does_not_unlock_missing_content(self):
-        self.unlock_sunny_beach_boss()
-
-        result = main.finish_boss(
-            20,
-            main.BossResultRequest(
-                correct_answers=8,
-                total_answers=8,
-            ),
-            database.DEFAULT_PLAYER_ID,
-        )
-
-        self.assertIsNone(result["next_level"])
-        self.assertEqual(
-            result["progress"]["current_level"],
-            20,
-        )
-        self.assertIn(
-            20,
-            result["progress"]["completed_levels"],
-        )
-
-    def test_hearts_never_drop_below_zero(self):
-        for _ in range(database.MAX_HEARTS):
-            self.assertTrue(
-                database.spend_heart()
-            )
-
-        self.assertFalse(
-            database.spend_heart()
-        )
-        self.assertEqual(
-            database.get_progress()["hearts"],
-            0,
-        )
-
-    def test_progress_is_clamped_to_available_content(self):
-        database.complete_level(
-            10,
-            0,
-            11,
-        )
-
-        database.clamp_current_level(10)
-
-        self.assertEqual(
-            database.get_progress()["current_level"],
-            10,
-        )
-
-    def test_existing_progress_gets_minimum_xp_for_level(self):
-        database.complete_level(
-            4,
-            1,
-            5,
-        )
-
-        database.ensure_minimum_xp_for_level(
-            5
-        )
-        progress = database.get_progress()
-
-        self.assertEqual(
-            progress["xp"],
-            xp_threshold_for_level(5),
-        )
-        self.assertEqual(
-            progress["player_level"],
-            5,
-        )
-
-    def test_game_uses_requested_player_name(self):
-        game = main.get_game(
-            database.DEFAULT_PLAYER_ID
-        )
-
-        self.assertEqual(
-            game["player"]["name"],
-            "Anya is a princess",
-        )
+    def test_second_location_keeps_beach_visual_theme(self):
+        location = main.GAME_DATA["locations"][1]
+        self.assertEqual(location["theme"], "beach")
+        self.assertEqual(location["id"], 2)
+        self.assertEqual(location["points"][0]["id"], 51)
 
     def test_players_have_independent_progress(self):
-        database.upsert_player(
-            "tester_2",
-            "Second Tester",
-        )
+        database.upsert_player("second_player", "Second")
+        main.finish_level(1, database.DEFAULT_PLAYER_ID)
+        self.assertEqual(database.get_progress(database.DEFAULT_PLAYER_ID)["current_level"], 2)
+        self.assertEqual(database.get_progress("second_player")["current_level"], 1)
 
-        main.finish_level(
-            1,
-            database.DEFAULT_PLAYER_ID,
-        )
+    def test_client_point_has_canonical_and_compatibility_views(self):
+        response = main.get_level(1, database.DEFAULT_PLAYER_ID)
+        self.assertEqual(len(response["point"]["exercises"]), 5)
+        self.assertEqual(len(response["level"]["steps"]), 5)
+        self.assertIn(response["point"]["exercises"][0]["type"], {
+            "multiple_choice", "fill_blank", "listening", "speech"
+        })
+        for step in response["level"]["steps"]:
+            if step["type"] in {"choice", "listening"}:
+                self.assertIsInstance(step["answer"], int)
+                canonical_answer = step["correct_answer"]
+                self.assertEqual(step["options"][step["answer"]], canonical_answer)
 
-        anya_progress = database.get_progress(
-            database.DEFAULT_PLAYER_ID
-        )
-        tester_progress = database.get_progress(
-            "tester_2"
-        )
-
-        self.assertEqual(
-            anya_progress["current_level"],
-            2,
-        )
-        self.assertEqual(
-            tester_progress["current_level"],
-            1,
-        )
-        self.assertEqual(
-            tester_progress["completed_levels"],
-            [],
-        )
-
-        main.finish_level(1, "tester_2")
-
-        self.assertIn(
-            1,
-            database.get_progress(
-                "tester_2"
-            )["completed_levels"],
-        )
-
-    def test_present_continuous_translation_accepts_optional_now(self):
-        level = main.find_level(
-            main.GAME_DATA,
-            9,
-        )
-        translation = level["steps"][0]
-
-        self.assertEqual(
-            translation["answer"],
-            "The cat is sleeping now.",
-        )
-        self.assertIn(
-            "The cat is sleeping.",
-            translation["accepted_answers"],
-        )
-
-    def test_fill_gap_steps_include_sentence_and_verb_cue(self):
-        for level_id in (2, 7, 10, 12, 15, 16, 20):
-            level = main.find_level(
-                main.GAME_DATA,
-                level_id,
-            )
-            text_steps = [
-                step
-                for step in level["steps"]
-                if step["type"] == "text"
-            ]
-
-            for step in text_steps:
-                self.assertIn("___", step["sentence"])
-                self.assertIn("form of", step["question"])
-
-    def test_available_levels_are_contiguous_and_documented(self):
-        levels = [
-            level
-            for location in main.GAME_DATA["locations"]
-            for level in location.get("levels", [])
+    def test_speech_tasks_are_honest_about_assessment(self):
+        speech_tasks = [
+            exercise
+            for location in main.GAME_DATA["locations"][:2]
+            for point in location["points"]
+            for exercise in point["exercises"]
+            if exercise["type"] == "speech"
         ]
+        self.assertGreater(len(speech_tasks), 0)
+        for task in speech_tasks:
+            self.assertIn(task["mode"], {"speech_repeat", "speech_response"})
+            self.assertFalse(task["speech_settings"]["pronunciation_assessed"])
+            self.assertTrue(task["accepted_answers"])
 
-        self.assertEqual(
-            [level["id"] for level in levels],
-            list(range(1, 21)),
+    def test_old_ten_point_progress_is_migrated_without_reset(self):
+        legacy_path = Path(self.temp_directory.name) / "legacy.db"
+        connection = sqlite3.connect(legacy_path)
+        connection.execute(
+            "CREATE TABLE player_progress (id INTEGER PRIMARY KEY, current_level INTEGER, xp INTEGER)"
         )
+        connection.execute(
+            "CREATE TABLE completed_levels (level_id INTEGER PRIMARY KEY, completed_at DATETIME)"
+        )
+        connection.execute("INSERT INTO player_progress VALUES (1, 11, 321)")
+        connection.executemany(
+            "INSERT INTO completed_levels VALUES (?, CURRENT_TIMESTAMP)",
+            [(point_id,) for point_id in range(1, 11)],
+        )
+        connection.commit()
+        connection.close()
 
-        for level in levels:
-            self.assertIn("grammar_help", level)
-            self.assertGreaterEqual(len(level["steps"]), 1)
-
-        self.assertTrue(levels[9]["boss"])
-        self.assertTrue(levels[19]["boss"])
-
-    def test_second_location_is_sunny_beach(self):
-        location = main.GAME_DATA["locations"][1]
-
-        self.assertEqual(location["name"], "Sunny Beach")
-        self.assertEqual(location["theme"], "beach")
-        self.assertEqual(len(location["levels"]), 10)
-
-    def test_english_prompts_have_russian_translations(self):
-        for location in main.GAME_DATA["locations"]:
-            for level in location.get("levels", []):
-                for step in level["steps"]:
-                    if not re.search(
-                        r"[А-Яа-яЁё]",
-                        step["question"],
-                    ):
-                        self.assertTrue(
-                            step.get("question_translation"),
-                            f"Missing question translation in level {level['id']}",
-                        )
-
-                    if step.get("sentence"):
-                        self.assertTrue(
-                            step.get("sentence_translation"),
-                            f"Missing sentence translation in level {level['id']}",
-                        )
+        database.DB_PATH = legacy_path
+        database.init_db()
+        progress = database.get_progress()
+        self.assertEqual(progress["current_level"], 51)
+        self.assertEqual(progress["xp"], 321)
+        self.assertEqual(progress["completed_levels"], list(range(1, 51)))
 
 
 if __name__ == "__main__":

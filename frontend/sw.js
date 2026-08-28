@@ -1,5 +1,5 @@
 const CACHE_NAME =
-    "english-rpg-v13";
+    "english-rpg-v14";
 
 
 const APP_FILES = [
@@ -10,6 +10,7 @@ const APP_FILES = [
     "/static/lesson-engine.js",
     "/static/map-engine.js",
     "/static/audio-engine.js",
+    "/static/speech-engine.js",
     "/static/assets/nagisa-pixel.png",
     "/static/assets/nagisa-app-icon-180.png",
     "/static/assets/nagisa-app-icon-192.png",

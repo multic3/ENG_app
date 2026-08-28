@@ -13,11 +13,13 @@ from .database import (
     check_database,
     clamp_current_level,
     complete_level,
-    ensure_minimum_xp_for_level,
+    get_due_reviews,
     get_player,
     get_progress,
     init_db,
+    record_attempts,
     reset_progress,
+    resolve_due_reviews,
     restore_hearts,
     spend_heart,
     upsert_player,
@@ -43,7 +45,8 @@ from .progression import (
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = BASE_DIR.parent.parent
 FRONTEND_DIR = PROJECT_DIR / "frontend"
-LEVELS_FILE = BASE_DIR / "levels.json"
+CURRICULUM_FILE = BASE_DIR / "curriculum.json"
+COURSE_CONTENT_FILE = BASE_DIR / "course_content.json"
 
 
 app = FastAPI(
@@ -61,7 +64,17 @@ app.add_middleware(
 )
 
 
-class BossResultRequest(BaseModel):
+class ExerciseAttemptRequest(BaseModel):
+    exercise_id: str = Field(min_length=1, max_length=80)
+    correct: bool
+    grammar_tags: list[str] = Field(default_factory=list)
+
+
+class CompletionRequest(BaseModel):
+    attempts: list[ExerciseAttemptRequest] = Field(default_factory=list)
+
+
+class BossResultRequest(CompletionRequest):
     correct_answers: int = Field(ge=0)
     total_answers: int = Field(gt=0)
 
@@ -103,12 +116,23 @@ def require_player_id(
 
 
 def load_game_data():
-    with open(
-        LEVELS_FILE,
-        "r",
-        encoding="utf-8",
-    ) as file:
-        return json.load(file)
+    manifest = json.loads(CURRICULUM_FILE.read_text(encoding="utf-8"))
+    content = json.loads(COURSE_CONTENT_FILE.read_text(encoding="utf-8"))
+    completed_content = {
+        location["id"]: location
+        for location in content["locations"]
+    }
+    locations = []
+    for metadata in manifest["locations"]:
+        location = {
+            **metadata,
+            "name": metadata["title"],
+            "description": metadata["communicative_goal"],
+            "points": [],
+        }
+        location.update(completed_content.get(metadata["id"], {}))
+        locations.append(location)
+    return {**manifest, "locations": locations}
 
 
 GAME_DATA = load_game_data()
@@ -116,7 +140,7 @@ GAME_DATA = load_game_data()
 
 def get_available_level_count() -> int:
     return sum(
-        len(location.get("levels", []))
+        len(location.get("points", []))
         for location in GAME_DATA["locations"]
     )
 
@@ -125,7 +149,7 @@ def get_highest_available_level_id() -> int:
     return max(
         level["id"]
         for location in GAME_DATA["locations"]
-        for level in location.get("levels", [])
+        for level in location.get("points", [])
     )
 
 
@@ -148,6 +172,26 @@ def get_available_next_level_id(
     return next_level_id
 
 
+def validated_attempts(level: dict, attempts: list[ExerciseAttemptRequest]) -> list[dict]:
+    exercises = {
+        exercise["id"]: exercise
+        for exercise in level.get("exercises", [])
+    }
+    result = []
+    for attempt in attempts:
+        exercise = exercises.get(attempt.exercise_id)
+        if exercise is None:
+            continue
+        result.append(
+            {
+                "exercise_id": attempt.exercise_id,
+                "correct": attempt.correct,
+                "grammar_tags": exercise.get("grammar_tags", []),
+            }
+        )
+    return result
+
+
 @app.on_event("startup")
 def startup():
     init_db()
@@ -156,10 +200,6 @@ def startup():
     )
     advance_past_completed_levels(
         get_highest_available_level_id()
-    )
-    progress = get_progress()
-    ensure_minimum_xp_for_level(
-        progress["current_level"]
     )
 
 
@@ -200,11 +240,6 @@ def create_player_session(
         get_highest_available_level_id(),
         player_id,
     )
-    progress = get_progress(player_id)
-    ensure_minimum_xp_for_level(
-        progress["current_level"],
-        player_id,
-    )
 
     return {
         "success": True,
@@ -235,6 +270,9 @@ def get_game(
                     "theme",
                     "default",
                 ),
+                "cefr": location["cefr"],
+                "world": location["world"],
+                "content_status": location.get("content_status", "planned"),
             }
         )
 
@@ -260,6 +298,8 @@ def get_game(
         },
         "progress": progress,
         "total_levels": TOTAL_LEVELS,
+        "total_locations": 100,
+        "points_per_location": 50,
         "available_levels": (
             get_available_level_count()
         ),
@@ -281,7 +321,7 @@ def get_locations(
         location_id = location["id"]
 
         start_level = (
-            (location_id - 1) * 10
+            (location_id - 1) * 50
         ) + 1
 
         unlocked = (
@@ -296,7 +336,7 @@ def get_locations(
                 in progress["completed_levels"]
                 if start_level
                 <= level_id
-                <= location_id * 10
+                <= location_id * 50
             ]
         )
 
@@ -309,8 +349,10 @@ def get_locations(
                     "theme",
                     "default",
                 ),
-                "unlocked": unlocked,
+                "unlocked": unlocked and bool(location.get("points")),
                 "completed": completed_count,
+                "points": 50,
+                "content_status": location.get("content_status", "planned"),
             }
         )
 
@@ -368,9 +410,32 @@ def get_level(
             detail="Level is locked",
         )
 
+    reviews_due = get_due_reviews(player_id, level_id)
     client_level = sanitize_level_for_client(
         level
     )
+    for review in reviews_due:
+        review_tags = set(review["grammar_tags"])
+        matching = next(
+            (
+                exercise
+                for exercise in client_level.get("exercises", [])
+                if review_tags.intersection(exercise.get("grammar_tags", []))
+            ),
+            None,
+        )
+        if matching is not None:
+            matching["review_for"] = review["source_exercise_id"]
+            matching_step = next(
+                (
+                    step
+                    for step in client_level.get("steps", [])
+                    if step.get("id") == matching.get("id")
+                ),
+                None,
+            )
+            if matching_step is not None:
+                matching_step["review_for"] = review["source_exercise_id"]
     client_level["xp"] = (
         xp_reward_for_lesson(
             level_id
@@ -379,7 +444,13 @@ def get_level(
 
     return {
         "level": client_level,
-        "location": location,
+        "point": client_level,
+        "location": {
+            key: value
+            for key, value in location.items()
+            if key not in {"points", "levels"}
+        },
+        "reviews_due": reviews_due,
     }
 
 
@@ -426,6 +497,7 @@ def restore_player_hearts(
 def finish_level(
     level_id: int,
     player_id: str = Depends(require_player_id),
+    payload: CompletionRequest | None = None,
 ):
 
     level = find_level(
@@ -475,6 +547,13 @@ def finish_level(
         next_level_id,
         player_id,
     )
+    if payload is not None:
+        record_attempts(
+            player_id,
+            level_id,
+            validated_attempts(level, payload.attempts),
+        )
+    resolve_due_reviews(player_id, level_id)
 
     return {
         "success": True,
@@ -541,6 +620,11 @@ def finish_boss(
     )
 
     if not result["passed"]:
+        record_attempts(
+            player_id,
+            level_id,
+            validated_attempts(level, payload.attempts),
+        )
 
         return {
             "success": False,
@@ -562,6 +646,12 @@ def finish_boss(
         next_level_id,
         player_id,
     )
+    record_attempts(
+        player_id,
+        level_id,
+        validated_attempts(level, payload.attempts),
+    )
+    resolve_due_reviews(player_id, level_id)
 
     return {
         "success": True,
@@ -570,6 +660,14 @@ def finish_boss(
         "next_level": next_level_id,
         "pass_threshold": BOSS_PASS_PERCENTAGE,
     }
+
+
+@app.get("/api/review/due")
+def due_review_queue(
+    point_id: int,
+    player_id: str = Depends(require_player_id),
+):
+    return {"reviews": get_due_reviews(player_id, point_id)}
 
 
 @app.post("/api/reset")

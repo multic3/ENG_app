@@ -83,16 +83,11 @@ class ProgressionTests(unittest.TestCase):
         )
 
     def test_lesson_rewards_follow_curve(self):
+        self.assertGreaterEqual(xp_reward_for_lesson(1), 1)
+        self.assertGreater(xp_reward_for_lesson(50), xp_reward_for_lesson(49))
+        self.assertGreater(xp_reward_for_lesson(4951), xp_reward_for_lesson(1))
         self.assertEqual(
-            xp_reward_for_lesson(1),
-            xp_required_to_advance(1),
-        )
-        self.assertEqual(
-            xp_reward_for_lesson(99),
-            xp_required_to_advance(99),
-        )
-        self.assertEqual(
-            xp_reward_for_lesson(100),
+            xp_reward_for_lesson(5000),
             FINAL_BOSS_BONUS_XP,
         )
 

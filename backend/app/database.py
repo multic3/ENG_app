@@ -1,4 +1,5 @@
 import os
+import json
 import sqlite3
 from pathlib import Path
 
@@ -24,6 +25,7 @@ MAX_HEARTS = 5
 DAILY_STREAK_DEFAULT = 1
 DEFAULT_PLAYER_ID = "anya"
 DEFAULT_PLAYER_NAME = "Anya is a princess"
+COURSE_SCHEMA_VERSION = "2"
 
 
 def get_connection():
@@ -89,6 +91,57 @@ def _migrate_completed_levels(connection):
         (DEFAULT_PLAYER_ID,),
     )
     connection.execute("DROP TABLE completed_levels_single_player")
+
+
+def _migrate_course_points(connection):
+    """Expand each old 10-point location slot into five new point slots."""
+    version = connection.execute(
+        "SELECT value FROM app_metadata WHERE key = 'course_schema_version'"
+    ).fetchone()
+    if version is not None and version["value"] == COURSE_SCHEMA_VERSION:
+        return
+
+    progress_rows = connection.execute(
+        "SELECT player_id, current_level FROM player_progress"
+    ).fetchall()
+    for row in progress_rows:
+        old_id = max(1, min(int(row["current_level"]), 20))
+        old_location = (old_id - 1) // 10
+        old_local = (old_id - 1) % 10
+        new_id = (old_location * 50) + (old_local * 5) + 1
+        connection.execute(
+            "UPDATE player_progress SET current_level = ? WHERE player_id = ?",
+            (new_id, row["player_id"]),
+        )
+
+    completed_rows = connection.execute(
+        "SELECT player_id, level_id, completed_at FROM completed_levels"
+    ).fetchall()
+    connection.execute("DELETE FROM completed_levels")
+    for row in completed_rows:
+        old_id = int(row["level_id"])
+        if not 1 <= old_id <= 20:
+            continue
+        old_location = (old_id - 1) // 10
+        old_local = (old_id - 1) % 10
+        first_new_id = (old_location * 50) + (old_local * 5) + 1
+        for new_id in range(first_new_id, first_new_id + 5):
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO completed_levels
+                    (player_id, level_id, completed_at)
+                VALUES (?, ?, ?)
+                """,
+                (row["player_id"], new_id, row["completed_at"]),
+            )
+
+    connection.execute(
+        """
+        INSERT INTO app_metadata (key, value) VALUES ('course_schema_version', ?)
+        ON CONFLICT(key) DO UPDATE SET value = excluded.value
+        """,
+        (COURSE_SCHEMA_VERSION,),
+    )
 
 
 def init_db():
@@ -174,6 +227,45 @@ def init_db():
 
     connection.execute(
         """
+        CREATE TABLE IF NOT EXISTS app_metadata (
+            key TEXT PRIMARY KEY,
+            value TEXT NOT NULL
+        )
+        """
+    )
+
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS exercise_attempts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_id TEXT NOT NULL,
+            exercise_id TEXT NOT NULL,
+            point_id INTEGER NOT NULL,
+            correct INTEGER NOT NULL,
+            grammar_tags TEXT NOT NULL DEFAULT '[]',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
+        )
+        """
+    )
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS review_queue (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_id TEXT NOT NULL,
+            source_exercise_id TEXT NOT NULL,
+            grammar_tags TEXT NOT NULL DEFAULT '[]',
+            due_point_id INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'pending',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(player_id, source_exercise_id, status),
+            FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
+        )
+        """
+    )
+
+    connection.execute(
+        """
         INSERT OR IGNORE INTO player_progress (
             player_id,
             current_level,
@@ -186,6 +278,77 @@ def init_db():
         (DEFAULT_PLAYER_ID, DAILY_STREAK_DEFAULT, MAX_HEARTS),
     )
 
+    _migrate_course_points(connection)
+
+    connection.commit()
+    connection.close()
+
+
+def record_attempts(
+    player_id: str,
+    point_id: int,
+    attempts: list[dict],
+):
+    connection = get_connection()
+    for attempt in attempts:
+        tags = attempt.get("grammar_tags") or []
+        serialized_tags = json.dumps(tags, ensure_ascii=False)
+        correct = bool(attempt.get("correct"))
+        exercise_id = str(attempt.get("exercise_id", "")).strip()
+        if not exercise_id:
+            continue
+        connection.execute(
+            """
+            INSERT INTO exercise_attempts
+                (player_id, exercise_id, point_id, correct, grammar_tags)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (player_id, exercise_id, point_id, int(correct), serialized_tags),
+        )
+        if not correct:
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO review_queue
+                    (player_id, source_exercise_id, grammar_tags, due_point_id)
+                VALUES (?, ?, ?, ?)
+                """,
+                (player_id, exercise_id, serialized_tags, point_id + 3),
+            )
+    connection.commit()
+    connection.close()
+
+
+def get_due_reviews(player_id: str, point_id: int) -> list[dict]:
+    connection = get_connection()
+    rows = connection.execute(
+        """
+        SELECT id, source_exercise_id, grammar_tags, due_point_id
+        FROM review_queue
+        WHERE player_id = ? AND status = 'pending' AND due_point_id <= ?
+        ORDER BY due_point_id, id
+        LIMIT 5
+        """,
+        (player_id, point_id),
+    ).fetchall()
+    connection.close()
+    return [
+        {
+            **dict(row),
+            "grammar_tags": json.loads(row["grammar_tags"]),
+        }
+        for row in rows
+    ]
+
+
+def resolve_due_reviews(player_id: str, point_id: int) -> None:
+    connection = get_connection()
+    connection.execute(
+        """
+        DELETE FROM review_queue
+        WHERE player_id = ? AND status = 'pending' AND due_point_id <= ?
+        """,
+        (player_id, point_id),
+    )
     connection.commit()
     connection.close()
 
@@ -437,6 +600,14 @@ def reset_progress(player_id: str = DEFAULT_PLAYER_ID):
     connection = get_connection()
     connection.execute(
         "DELETE FROM completed_levels WHERE player_id = ?",
+        (player_id,),
+    )
+    connection.execute(
+        "DELETE FROM exercise_attempts WHERE player_id = ?",
+        (player_id,),
+    )
+    connection.execute(
+        "DELETE FROM review_queue WHERE player_id = ?",
         (player_id,),
     )
     connection.execute(

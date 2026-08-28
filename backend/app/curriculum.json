@@ -1,0 +1,2608 @@
+{
+  "schema_version": 2,
+  "course": {
+    "title": "English RPG: A2 to B2",
+    "locations": 100,
+    "points_per_location": 50,
+    "exercises_per_point": 5,
+    "total_points": 5000,
+    "total_exercises": 25000
+  },
+  "locations": [
+    {
+      "id": 1,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Новое знакомство",
+      "topic": "приветствие и знакомство.",
+      "communicative_goal": "представиться, назвать имя, страну и профессию.",
+      "grammar": [
+        "to be",
+        "личные местоимения",
+        "базовый порядок слов."
+      ],
+      "grammar_summary": "to be, личные местоимения, базовый порядок слов.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "представиться, назвать имя, страну и профессию.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "complete"
+    },
+    {
+      "id": 2,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Расскажи о себе",
+      "topic": "личная информация.",
+      "communicative_goal": "рассказать о себе и задать простые личные вопросы.",
+      "grammar": [
+        "have/have got",
+        "вопросы с what",
+        "where",
+        "how old."
+      ],
+      "grammar_summary": "have/have got, вопросы с what, where, how old.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "рассказать о себе и задать простые личные вопросы.",
+      "theme": "beach",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "complete"
+    },
+    {
+      "id": 3,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Семейный дом",
+      "topic": "семья и внешность.",
+      "communicative_goal": "описать родственников и отношения между людьми.",
+      "grammar": [
+        "притяжательные местоимения",
+        "possessive ’s",
+        "have/has."
+      ],
+      "grammar_summary": "притяжательные местоимения, possessive ’s, have/has.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "описать родственников и отношения между людьми.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 4,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Первое жилище",
+      "topic": "дом, комнаты и предметы.",
+      "communicative_goal": "описать комнату и расположение предметов.",
+      "grammar": [
+        "there is/there are",
+        "артикли",
+        "предлоги места."
+      ],
+      "grammar_summary": "there is/there are, артикли, предлоги места.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "описать комнату и расположение предметов.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 5,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Обычный день",
+      "topic": "распорядок дня.",
+      "communicative_goal": "рассказать о ежедневных действиях.",
+      "grammar": [
+        "Present Simple в утверждениях."
+      ],
+      "grammar_summary": "Present Simple в утверждениях.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "рассказать о ежедневных действиях.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 6,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Часы на башне",
+      "topic": "время, даты и расписание.",
+      "communicative_goal": "сообщить время и описать расписание.",
+      "grammar": [
+        "наречия частотности",
+        "предлоги времени",
+        "порядок наречий."
+      ],
+      "grammar_summary": "наречия частотности, предлоги времени, порядок наречий.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "сообщить время и описать расписание.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 7,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Кухня Нагисы",
+      "topic": "еда и приготовление пищи.",
+      "communicative_goal": "назвать продукты и объяснить простой рецепт.",
+      "grammar": [
+        "исчисляемые",
+        "неисчисляемые существительные",
+        "some/any."
+      ],
+      "grammar_summary": "исчисляемые и неисчисляемые существительные, some/any.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "назвать продукты и объяснить простой рецепт.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 8,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Рынок",
+      "topic": "покупки и цены.",
+      "communicative_goal": "купить товар, уточнить цену и количество.",
+      "grammar": [
+        "much/many",
+        "how much/how many",
+        "this/that/these/those."
+      ],
+      "grammar_summary": "much/many, how much/how many, this/that/these/those.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "купить товар, уточнить цену и количество.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 9,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Улицы города",
+      "topic": "городские места и направления.",
+      "communicative_goal": "спросить дорогу и объяснить маршрут.",
+      "grammar": [
+        "повелительное наклонение",
+        "предлоги направления."
+      ],
+      "grammar_summary": "повелительное наклонение, предлоги направления.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "спросить дорогу и объяснить маршрут.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 10,
+      "cefr": "A2",
+      "world_id": 1,
+      "world": "Пиксельное поселение",
+      "title": "Выходной с друзьями",
+      "topic": "хобби и свободное время.",
+      "communicative_goal": "рассказать об увлечениях и предложить совместное занятие.",
+      "grammar": [
+        "can/can’t",
+        "like/love/hate + ing."
+      ],
+      "grammar_summary": "can/can’t, like/love/hate + ing.",
+      "vocabulary": [
+        "personal information",
+        "home",
+        "daily life",
+        "food",
+        "town"
+      ],
+      "expected_outcome": "рассказать об увлечениях и предложить совместное занятие.",
+      "theme": "village",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 11,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Что происходит сейчас",
+      "topic": "действия в настоящий момент.",
+      "communicative_goal": "описать, что сейчас делают люди.",
+      "grammar": [
+        "Present Continuous."
+      ],
+      "grammar_summary": "Present Continuous.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "описать, что сейчас делают люди.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 12,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Обычно или сейчас",
+      "topic": "привычки и временные действия.",
+      "communicative_goal": "различать постоянные и происходящие сейчас действия.",
+      "grammar": [
+        "Present Simple vs Present Continuous."
+      ],
+      "grammar_summary": "Present Simple vs Present Continuous.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "различать постоянные и происходящие сейчас действия.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 13,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Вчера в городе",
+      "topic": "прошедший день.",
+      "communicative_goal": "кратко рассказать о вчерашних событиях.",
+      "grammar": [
+        "was/were",
+        "Past Simple правильных глаголов."
+      ],
+      "grammar_summary": "was/were, Past Simple правильных глаголов.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "кратко рассказать о вчерашних событиях.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 14,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "История выходного дня",
+      "topic": "завершённые события.",
+      "communicative_goal": "рассказать о прошедших выходных.",
+      "grammar": [
+        "неправильные глаголы Past Simple",
+        "вопросы",
+        "отрицания."
+      ],
+      "grammar_summary": "неправильные глаголы Past Simple, вопросы и отрицания.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "рассказать о прошедших выходных.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 15,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Городской транспорт",
+      "topic": "автобус, поезд, метро и дорога.",
+      "communicative_goal": "купить билет и уточнить маршрут.",
+      "grammar": [
+        "can/could",
+        "have to",
+        "предлоги движения."
+      ],
+      "grammar_summary": "can/could, have to, предлоги движения.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "купить билет и уточнить маршрут.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 16,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Планы на путешествие",
+      "topic": "ближайшее будущее.",
+      "communicative_goal": "рассказать о планах и договориться о встрече.",
+      "grammar": [
+        "be going to",
+        "Present Continuous для договорённостей",
+        "базовое will."
+      ],
+      "grammar_summary": "be going to, Present Continuous для договорённостей, базовое will.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "рассказать о планах и договориться о встрече.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 17,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Аптека",
+      "topic": "здоровье и самочувствие.",
+      "communicative_goal": "описать симптомы и понять простой совет.",
+      "grammar": [
+        "should/shouldn’t",
+        "must/mustn’t",
+        "have to."
+      ],
+      "grammar_summary": "should/shouldn’t, must/mustn’t, have to.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "описать симптомы и понять простой совет.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 18,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Лучший выбор",
+      "topic": "сравнение людей, мест и вещей.",
+      "communicative_goal": "сравнить варианты и объяснить простой выбор.",
+      "grammar": [
+        "comparatives",
+        "superlatives",
+        "as…as."
+      ],
+      "grammar_summary": "comparatives, superlatives, as…as.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "сравнить варианты и объяснить простой выбор.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 19,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Жизненный опыт",
+      "topic": "то, что человек когда-либо делал.",
+      "communicative_goal": "спросить и рассказать о жизненном опыте.",
+      "grammar": [
+        "базовый Present Perfect",
+        "ever/never",
+        "been."
+      ],
+      "grammar_summary": "базовый Present Perfect, ever/never, been.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "спросить и рассказать о жизненном опыте.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 20,
+      "cefr": "A2",
+      "world_id": 2,
+      "world": "Городские приключения",
+      "title": "Фестиваль поселения",
+      "topic": "итоговая миссия A2.",
+      "communicative_goal": "пройти бытовой сюжет без постоянных готовых реплик.",
+      "grammar": [
+        "интеграция Present Simple",
+        "Present Continuous",
+        "Past Simple",
+        "будущих форм",
+        "модальных глаголов",
+        "Present Perfect."
+      ],
+      "grammar_summary": "интеграция Present Simple, Present Continuous, Past Simple, будущих форм, модальных глаголов и Present Perfect.",
+      "vocabulary": [
+        "city life",
+        "travel",
+        "health",
+        "plans",
+        "experience"
+      ],
+      "expected_outcome": "пройти бытовой сюжет без постоянных готовых реплик.",
+      "theme": "city",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 21,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Фото из путешествия",
+      "topic": "Фото из путешествия",
+      "communicative_goal": "различать опыт и конкретное прошедшее событие.",
+      "grammar": [
+        "Present Perfect vs Past Simple."
+      ],
+      "grammar_summary": "Present Perfect vs Past Simple.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "различать опыт и конкретное прошедшее событие.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 22,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Новости из дороги",
+      "topic": "Новости из дороги",
+      "communicative_goal": "сообщать о недавних событиях и продолжительности.",
+      "grammar": [
+        "for",
+        "since",
+        "already",
+        "yet",
+        "just."
+      ],
+      "grammar_summary": "for, since, already, yet, just.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "сообщать о недавних событиях и продолжительности.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 23,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Неожиданная встреча",
+      "topic": "Неожиданная встреча",
+      "communicative_goal": "описывать действие, происходившее в определённый момент.",
+      "grammar": [
+        "Past Continuous."
+      ],
+      "grammar_summary": "Past Continuous.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "описывать действие, происходившее в определённый момент.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 24,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Когда всё случилось",
+      "topic": "Когда всё случилось",
+      "communicative_goal": "рассказывать историю с фоновыми и основными событиями.",
+      "grammar": [
+        "Past Simple vs Past Continuous."
+      ],
+      "grammar_summary": "Past Simple vs Past Continuous.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "рассказывать историю с фоновыми и основными событиями.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 25,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Что произошло раньше",
+      "topic": "Что произошло раньше",
+      "communicative_goal": "показывать порядок событий в прошлом.",
+      "grammar": [
+        "Past Perfect."
+      ],
+      "grammar_summary": "Past Perfect.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "показывать порядок событий в прошлом.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 26,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Раньше всё было иначе",
+      "topic": "Раньше всё было иначе",
+      "communicative_goal": "сравнивать прошлый и нынешний образ жизни.",
+      "grammar": [
+        "used to",
+        "would для прошлых привычек."
+      ],
+      "grammar_summary": "used to и would для прошлых привычек.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "сравнивать прошлый и нынешний образ жизни.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 27,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Маршрут на завтра",
+      "topic": "Маршрут на завтра",
+      "communicative_goal": "различать решение, прогноз, намерение и договорённость.",
+      "grammar": [
+        "will",
+        "going to",
+        "Present Continuous."
+      ],
+      "grammar_summary": "will, going to, Present Continuous.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "различать решение, прогноз, намерение и договорённость.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 28,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Если поезд опоздает",
+      "topic": "Если поезд опоздает",
+      "communicative_goal": "обсуждать реальные будущие условия.",
+      "grammar": [
+        "First Conditional",
+        "when/until/as soon as."
+      ],
+      "grammar_summary": "First Conditional, when/until/as soon as.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "обсуждать реальные будущие условия.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 29,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Правила экспедиции",
+      "topic": "Правила экспедиции",
+      "communicative_goal": "понимать и объяснять правила.",
+      "grammar": [
+        "obligation",
+        "permission",
+        "prohibition."
+      ],
+      "grammar_summary": "obligation, permission and prohibition.",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "понимать и объяснять правила.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 30,
+      "cefr": "B1",
+      "world_id": 3,
+      "world": "Дорога путешественника",
+      "title": "Потерянный багаж",
+      "topic": "Потерянный багаж",
+      "communicative_goal": "решить цепочку проблем в путешествии.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "journeys",
+        "events",
+        "transport",
+        "rules",
+        "problems"
+      ],
+      "expected_outcome": "решить цепочку проблем в путешествии.",
+      "theme": "journey",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 31,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Учёба новому навыку",
+      "topic": "Учёба новому навыку",
+      "communicative_goal": "говорить об обучении, целях и предпочтениях.",
+      "grammar": [
+        "gerund",
+        "infinitive."
+      ],
+      "grammar_summary": "gerund and infinitive.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "говорить об обучении, целях и предпочтениях.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 32,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Поиск работы",
+      "topic": "Поиск работы",
+      "communicative_goal": "описывать профессию, человека и обязанности.",
+      "grammar": [
+        "defining relative clauses."
+      ],
+      "grammar_summary": "defining relative clauses.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "описывать профессию, человека и обязанности.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 33,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Собеседование",
+      "topic": "Собеседование",
+      "communicative_goal": "вежливо задавать вопросы и отвечать на интервью.",
+      "grammar": [
+        "indirect questions."
+      ],
+      "grammar_summary": "indirect questions.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "вежливо задавать вопросы и отвечать на интервью.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 34,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Первый рабочий день",
+      "topic": "Первый рабочий день",
+      "communicative_goal": "обсуждать обязанности и разрешения.",
+      "grammar": [
+        "must",
+        "have to",
+        "need to",
+        "be allowed to."
+      ],
+      "grammar_summary": "must, have to, need to, be allowed to.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "обсуждать обязанности и разрешения.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 35,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Рабочая переписка",
+      "topic": "Рабочая переписка",
+      "communicative_goal": "писать и произносить понятные рабочие сообщения.",
+      "grammar": [
+        "clauses of purpose — to",
+        "for",
+        "so that."
+      ],
+      "grammar_summary": "clauses of purpose — to, for, so that.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "писать и произносить понятные рабочие сообщения.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 36,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Долгий проект",
+      "topic": "Долгий проект",
+      "communicative_goal": "рассказывать о продолжающейся работе.",
+      "grammar": [
+        "Present Perfect Continuous."
+      ],
+      "grammar_summary": "Present Perfect Continuous.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "рассказывать о продолжающейся работе.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 37,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Совещание",
+      "topic": "Совещание",
+      "communicative_goal": "передавать слова коллег.",
+      "grammar": [
+        "reported statements."
+      ],
+      "grammar_summary": "reported statements.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "передавать слова коллег.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 38,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Как это сделано",
+      "topic": "Как это сделано",
+      "communicative_goal": "описывать процессы и инструкции.",
+      "grammar": [
+        "Present",
+        "Past Passive."
+      ],
+      "grammar_summary": "Present and Past Passive.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "описывать процессы и инструкции.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 39,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Сроки и качество",
+      "topic": "Сроки и качество",
+      "communicative_goal": "обсуждать проблемы качества и сроков.",
+      "grammar": [
+        "too/enough",
+        "so/such."
+      ],
+      "grammar_summary": "too/enough, so/such.",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "обсуждать проблемы качества и сроков.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 40,
+      "cefr": "B1",
+      "world_id": 4,
+      "world": "Гильдия профессий",
+      "title": "Проект гильдии",
+      "topic": "Проект гильдии",
+      "communicative_goal": "пройти рабочую миссию от задания до отчёта.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "work",
+        "skills",
+        "projects",
+        "meetings",
+        "processes"
+      ],
+      "expected_outcome": "пройти рабочую миссию от задания до отчёта.",
+      "theme": "guild",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 41,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Характер и эмоции",
+      "topic": "Характер и эмоции",
+      "communicative_goal": "описывать эмоции и впечатления.",
+      "grammar": [
+        "-ed/-ing adjectives."
+      ],
+      "grammar_summary": "-ed/-ing adjectives.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "описывать эмоции и впечатления.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 42,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Если бы я был на твоём месте",
+      "topic": "Если бы я был на твоём месте",
+      "communicative_goal": "давать гипотетические советы.",
+      "grammar": [
+        "Second Conditional."
+      ],
+      "grammar_summary": "Second Conditional.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "давать гипотетические советы.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 43,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Дружба и отношения",
+      "topic": "Дружба и отношения",
+      "communicative_goal": "обсуждать отношения и поведение.",
+      "grammar": [
+        "verb patterns",
+        "возвратные местоимения."
+      ],
+      "grammar_summary": "verb patterns и возвратные местоимения.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "обсуждать отношения и поведение.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 44,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Недопонимание",
+      "topic": "Недопонимание",
+      "communicative_goal": "передавать вопросы, просьбы и распоряжения.",
+      "grammar": [
+        "reported questions",
+        "commands."
+      ],
+      "grammar_summary": "reported questions and commands.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "передавать вопросы, просьбы и распоряжения.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 45,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Что с ним случилось?",
+      "topic": "Что с ним случилось?",
+      "communicative_goal": "делать предположения на основе признаков.",
+      "grammar": [
+        "modals of present deduction."
+      ],
+      "grammar_summary": "modals of present deduction.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "делать предположения на основе признаков.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 46,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Деньги и расходы",
+      "topic": "Деньги и расходы",
+      "communicative_goal": "обсуждать бюджет и расходы.",
+      "grammar": [
+        "quantifiers — few/little",
+        "plenty of",
+        "enough."
+      ],
+      "grammar_summary": "quantifiers — few/little, plenty of, enough.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "обсуждать бюджет и расходы.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 47,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Новое жильё",
+      "topic": "Новое жильё",
+      "communicative_goal": "подробно описывать жильё и район.",
+      "grammar": [
+        "defining",
+        "non-defining relative clauses."
+      ],
+      "grammar_summary": "defining and non-defining relative clauses.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "подробно описывать жильё и район.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 48,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Ремонт и услуги",
+      "topic": "Ремонт и услуги",
+      "communicative_goal": "объяснять, какую услугу нужно выполнить.",
+      "grammar": [
+        "базовое have/get something done."
+      ],
+      "grammar_summary": "базовое have/get something done.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "объяснять, какую услугу нужно выполнить.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 49,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Привыкнуть к новому",
+      "topic": "Привыкнуть к новому",
+      "communicative_goal": "говорить об адаптации и изменениях.",
+      "grammar": [
+        "be used to/get used to."
+      ],
+      "grammar_summary": "be used to/get used to.",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "говорить об адаптации и изменениях.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 50,
+      "cefr": "B1",
+      "world_id": 5,
+      "world": "Люди и повседневные проблемы",
+      "title": "Неделя сложных решений",
+      "topic": "Неделя сложных решений",
+      "communicative_goal": "решить бытовые, финансовые и личные проблемы.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "relationships",
+        "money",
+        "housing",
+        "services",
+        "change"
+      ],
+      "expected_outcome": "решить бытовые, финансовые и личные проблемы.",
+      "theme": "neighborhood",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 51,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Новости королевства",
+      "topic": "Новости королевства",
+      "communicative_goal": "понимать и пересказывать новости.",
+      "grammar": [
+        "пассивный залог в основных временах."
+      ],
+      "grammar_summary": "пассивный залог в основных временах.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "понимать и пересказывать новости.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 52,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Социальные сети",
+      "topic": "Социальные сети",
+      "communicative_goal": "пересказывать публикации и комментарии.",
+      "grammar": [
+        "расширенная косвенная речь."
+      ],
+      "grammar_summary": "расширенная косвенная речь.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "пересказывать публикации и комментарии.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 53,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Культура и традиции",
+      "topic": "Культура и традиции",
+      "communicative_goal": "объяснять культурные особенности.",
+      "grammar": [
+        "relative clauses",
+        "описательные конструкции."
+      ],
+      "grammar_summary": "relative clauses и описательные конструкции.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "объяснять культурные особенности.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 54,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Экологические привычки",
+      "topic": "Экологические привычки",
+      "communicative_goal": "объяснять закономерности и последствия.",
+      "grammar": [
+        "Zero",
+        "First Conditionals."
+      ],
+      "grammar_summary": "Zero and First Conditionals.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "объяснять закономерности и последствия.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 55,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Технологии завтра",
+      "topic": "Технологии завтра",
+      "communicative_goal": "описывать предполагаемые будущие процессы.",
+      "grammar": [
+        "Future Continuous."
+      ],
+      "grammar_summary": "Future Continuous.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "описывать предполагаемые будущие процессы.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 56,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Трудный выбор",
+      "topic": "Трудный выбор",
+      "communicative_goal": "обсуждать возможные решения.",
+      "grammar": [
+        "Second Conditional",
+        "may/might."
+      ],
+      "grammar_summary": "Second Conditional, may/might.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "обсуждать возможные решения.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 57,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Книги и фильмы",
+      "topic": "Книги и фильмы",
+      "communicative_goal": "пересказать сюжет и выразить впечатление.",
+      "grammar": [
+        "narrative tenses",
+        "язык рецензий."
+      ],
+      "grammar_summary": "narrative tenses и язык рецензий.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "пересказать сюжет и выразить впечатление.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 58,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Согласие и несогласие",
+      "topic": "Согласие и несогласие",
+      "communicative_goal": "строить связное мнение.",
+      "grammar": [
+        "although",
+        "however",
+        "therefore",
+        "because of."
+      ],
+      "grammar_summary": "although, however, therefore, because of.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "строить связное мнение.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 59,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Обсуждение у костра",
+      "topic": "Обсуждение у костра",
+      "communicative_goal": "поддерживать обсуждение и уточнять позицию.",
+      "grammar": [
+        "question tags",
+        "indirect questions."
+      ],
+      "grammar_summary": "question tags и indirect questions.",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "поддерживать обсуждение и уточнять позицию.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 60,
+      "cefr": "B1",
+      "world_id": 6,
+      "world": "Информация и окружающий мир",
+      "title": "Большая экспедиция B1",
+      "topic": "Большая экспедиция B1",
+      "communicative_goal": "рассказать историю, решить проблему и аргументировать мнение.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "news",
+        "culture",
+        "environment",
+        "technology",
+        "discussion"
+      ],
+      "expected_outcome": "рассказать историю, решить проблему и аргументировать мнение.",
+      "theme": "nature",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 61,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Профессиональный путь",
+      "topic": "Профессиональный путь",
+      "communicative_goal": "подробно рассказывать о профессиональном опыте.",
+      "grammar": [
+        "сочетание Perfect",
+        "Continuous."
+      ],
+      "grammar_summary": "сочетание Perfect и Continuous.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "подробно рассказывать о профессиональном опыте.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 62,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Будущее карьеры",
+      "topic": "Будущее карьеры",
+      "communicative_goal": "описывать будущие этапы и результаты.",
+      "grammar": [
+        "Future Continuous",
+        "Future Perfect."
+      ],
+      "grammar_summary": "Future Continuous and Future Perfect.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "описывать будущие этапы и результаты.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 63,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Командная работа",
+      "topic": "Командная работа",
+      "communicative_goal": "обсуждать ответственность и вероятность.",
+      "grammar": [
+        "оттенки модальных глаголов."
+      ],
+      "grammar_summary": "оттенки модальных глаголов.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "обсуждать ответственность и вероятность.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 64,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Лидерство",
+      "topic": "Лидерство",
+      "communicative_goal": "объяснять делегирование и организацию работы.",
+      "grammar": [
+        "causative structures."
+      ],
+      "grammar_summary": "causative structures.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "объяснять делегирование и организацию работы.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 65,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Сложные переговоры",
+      "topic": "Сложные переговоры",
+      "communicative_goal": "обсуждать условия и упущенные возможности.",
+      "grammar": [
+        "Second",
+        "Third Conditionals."
+      ],
+      "grammar_summary": "Second and Third Conditionals.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "обсуждать условия и упущенные возможности.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 66,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Презентация",
+      "topic": "Презентация",
+      "communicative_goal": "подчёркивать ключевые мысли.",
+      "grammar": [
+        "cleft sentences",
+        "средства смыслового выделения."
+      ],
+      "grammar_summary": "cleft sentences и средства смыслового выделения.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "подчёркивать ключевые мысли.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 67,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Управление проектом",
+      "topic": "Управление проектом",
+      "communicative_goal": "формально описывать процессы и ответственность.",
+      "grammar": [
+        "advanced passive."
+      ],
+      "grammar_summary": "advanced passive.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "формально описывать процессы и ответственность.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 68,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Дипломатичная критика",
+      "topic": "Дипломатичная критика",
+      "communicative_goal": "давать обратную связь без излишней резкости.",
+      "grammar": [
+        "hedging",
+        "tentative language."
+      ],
+      "grammar_summary": "hedging и tentative language.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "давать обратную связь без излишней резкости.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 69,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Удалённая команда",
+      "topic": "Удалённая команда",
+      "communicative_goal": "компактно выражать сложные мысли.",
+      "grammar": [
+        "participle clauses",
+        "сокращённые определения."
+      ],
+      "grammar_summary": "participle clauses и сокращённые определения.",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "компактно выражать сложные мысли.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 70,
+      "cefr": "B2",
+      "world_id": 7,
+      "world": "Карьерная цитадель",
+      "title": "Кризисное совещание",
+      "topic": "Кризисное совещание",
+      "communicative_goal": "обсудить проблему, предложить решение и договориться.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "career",
+        "leadership",
+        "negotiation",
+        "projects",
+        "feedback"
+      ],
+      "expected_outcome": "обсудить проблему, предложить решение и договориться.",
+      "theme": "citadel",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 71,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Факт или мнение",
+      "topic": "Факт или мнение",
+      "communicative_goal": "различать утверждение, мнение и доказательство.",
+      "grammar": [
+        "reporting verbs."
+      ],
+      "grammar_summary": "reporting verbs.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "различать утверждение, мнение и доказательство.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 72,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Данные и тенденции",
+      "topic": "Данные и тенденции",
+      "communicative_goal": "описывать изменения и сравнивать данные.",
+      "grammar": [
+        "modifiers of comparison",
+        "approximate language."
+      ],
+      "grammar_summary": "modifiers of comparison и approximate language.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "описывать изменения и сравнивать данные.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 73,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Научное открытие",
+      "topic": "Научное открытие",
+      "communicative_goal": "передавать научную информацию нейтрально.",
+      "grammar": [
+        "passive reporting structures."
+      ],
+      "grammar_summary": "passive reporting structures.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "передавать научную информацию нейтрально.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 74,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Искусственный интеллект",
+      "topic": "Искусственный интеллект",
+      "communicative_goal": "обсуждать вероятные последствия технологий.",
+      "grammar": [
+        "modals of probability",
+        "deduction."
+      ],
+      "grammar_summary": "modals of probability and deduction.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "обсуждать вероятные последствия технологий.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 75,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Медицинские утверждения",
+      "topic": "Медицинские утверждения",
+      "communicative_goal": "осторожно формулировать выводы.",
+      "grammar": [
+        "hedging — seems",
+        "tends to",
+        "is likely to."
+      ],
+      "grammar_summary": "hedging — seems, tends to, is likely to.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "осторожно формулировать выводы.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 76,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Недостоверная информация",
+      "topic": "Недостоверная информация",
+      "communicative_goal": "анализировать и пересказывать спорные утверждения.",
+      "grammar": [
+        "advanced reported speech."
+      ],
+      "grammar_summary": "advanced reported speech.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "анализировать и пересказывать спорные утверждения.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 77,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Причины и последствия",
+      "topic": "Причины и последствия",
+      "communicative_goal": "строить последовательное объяснение.",
+      "grammar": [
+        "complex cause-and-effect linkers."
+      ],
+      "grammar_summary": "complex cause-and-effect linkers.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "строить последовательное объяснение.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 78,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Сравнение решений",
+      "topic": "Сравнение решений",
+      "communicative_goal": "связывать прошлые причины с настоящими последствиями.",
+      "grammar": [
+        "Mixed Conditionals."
+      ],
+      "grammar_summary": "Mixed Conditionals.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "связывать прошлые причины с настоящими последствиями.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 79,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Степень уверенности",
+      "topic": "Степень уверенности",
+      "communicative_goal": "оценивать прошлые события и вероятность.",
+      "grammar": [
+        "modal perfect forms."
+      ],
+      "grammar_summary": "modal perfect forms.",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "оценивать прошлые события и вероятность.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 80,
+      "cefr": "B2",
+      "world_id": 8,
+      "world": "Пещеры знаний",
+      "title": "Экспертный доклад",
+      "topic": "Экспертный доклад",
+      "communicative_goal": "представить доказательства и сделать осторожный вывод.",
+      "grammar": [
+        "Интеграция изученных конструкций"
+      ],
+      "grammar_summary": "Интеграция изученных конструкций",
+      "vocabulary": [
+        "evidence",
+        "data",
+        "science",
+        "technology",
+        "reasoning"
+      ],
+      "expected_outcome": "представить доказательства и сделать осторожный вывод.",
+      "theme": "caves",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 81,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Город будущего",
+      "topic": "Город будущего",
+      "communicative_goal": "подробно описывать городские решения.",
+      "grammar": [
+        "complex noun phrases",
+        "relative clauses."
+      ],
+      "grammar_summary": "complex noun phrases и relative clauses.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "подробно описывать городские решения.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 82,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Изменение климата",
+      "topic": "Изменение климата",
+      "communicative_goal": "обсуждать долгосрочные последствия.",
+      "grammar": [
+        "Future Perfect",
+        "условные конструкции."
+      ],
+      "grammar_summary": "Future Perfect и условные конструкции.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "обсуждать долгосрочные последствия.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 83,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Экономика",
+      "topic": "Экономика",
+      "communicative_goal": "выражать идеи в более формальном стиле.",
+      "grammar": [
+        "базовая номинализация."
+      ],
+      "grammar_summary": "базовая номинализация.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "выражать идеи в более формальном стиле.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 84,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Реклама и потребление",
+      "topic": "Реклама и потребление",
+      "communicative_goal": "анализировать способы убеждения.",
+      "grammar": [
+        "emphasis structures."
+      ],
+      "grammar_summary": "emphasis structures.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "анализировать способы убеждения.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 85,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Образование будущего",
+      "topic": "Образование будущего",
+      "communicative_goal": "обсуждать желаемые изменения и сожаления.",
+      "grammar": [
+        "wish/if only."
+      ],
+      "grammar_summary": "wish/if only.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "обсуждать желаемые изменения и сожаления.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 86,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Культурные различия",
+      "topic": "Культурные различия",
+      "communicative_goal": "сравнивать культуры корректно и нейтрально.",
+      "grammar": [
+        "discourse markers",
+        "смена регистра."
+      ],
+      "grammar_summary": "discourse markers и смена регистра.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "сравнивать культуры корректно и нейтрально.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 87,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "СМИ и влияние",
+      "topic": "СМИ и влияние",
+      "communicative_goal": "анализировать подачу информации.",
+      "grammar": [
+        "advanced passive",
+        "reporting."
+      ],
+      "grammar_summary": "advanced passive and reporting.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "анализировать подачу информации.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 88,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Этический выбор",
+      "topic": "Этический выбор",
+      "communicative_goal": "обсуждать последствия моральных решений.",
+      "grammar": [
+        "Third",
+        "Mixed Conditionals."
+      ],
+      "grammar_summary": "Third and Mixed Conditionals.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "обсуждать последствия моральных решений.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 89,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Законы и правила",
+      "topic": "Законы и правила",
+      "communicative_goal": "формулировать официальные предложения.",
+      "grammar": [
+        "formal recommendations",
+        "it is essential that."
+      ],
+      "grammar_summary": "formal recommendations, it is essential that.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "формулировать официальные предложения.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 90,
+      "cefr": "B2",
+      "world_id": 9,
+      "world": "Общество и культура",
+      "title": "Публичные дебаты",
+      "topic": "Публичные дебаты",
+      "communicative_goal": "аргументированно соглашаться и возражать.",
+      "grammar": [
+        "concession",
+        "refutation",
+        "qualification."
+      ],
+      "grammar_summary": "concession, refutation and qualification.",
+      "vocabulary": [
+        "society",
+        "climate",
+        "economy",
+        "education",
+        "debate"
+      ],
+      "expected_outcome": "аргументированно соглашаться и возражать.",
+      "theme": "culture",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 91,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Сложные отношения",
+      "topic": "Сложные отношения",
+      "communicative_goal": "анализировать поведение и прошлые решения.",
+      "grammar": [
+        "past modals",
+        "wish",
+        "regret."
+      ],
+      "grammar_summary": "past modals, wish and regret.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "анализировать поведение и прошлые решения.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 92,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Посредник",
+      "topic": "Посредник",
+      "communicative_goal": "помогать сторонам разрешить конфликт.",
+      "grammar": [
+        "diplomatic conditionals",
+        "hedging."
+      ],
+      "grammar_summary": "diplomatic conditionals and hedging.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "помогать сторонам разрешить конфликт.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 93,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Искусство",
+      "topic": "Искусство",
+      "communicative_goal": "интерпретировать произведение.",
+      "grammar": [
+        "participle clauses",
+        "сложные описания."
+      ],
+      "grammar_summary": "participle clauses и сложные описания.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "интерпретировать произведение.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 94,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Книги и кино",
+      "topic": "Книги и кино",
+      "communicative_goal": "анализировать сюжет, героев и авторскую позицию.",
+      "grammar": [
+        "advanced narrative tenses."
+      ],
+      "grammar_summary": "advanced narrative tenses.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "анализировать сюжет, героев и авторскую позицию.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 95,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Альтернативное будущее",
+      "topic": "Альтернативное будущее",
+      "communicative_goal": "рассуждать о гипотетическом развитии событий.",
+      "grammar": [
+        "Mixed Conditionals",
+        "Future Perfect."
+      ],
+      "grammar_summary": "Mixed Conditionals и Future Perfect.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "рассуждать о гипотетическом развитии событий.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 96,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Убедительная речь",
+      "topic": "Убедительная речь",
+      "communicative_goal": "построить убедительное выступление.",
+      "grammar": [
+        "emphasis",
+        "rhetorical structures",
+        "linking."
+      ],
+      "grammar_summary": "emphasis, rhetorical structures and linking.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "построить убедительное выступление.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 97,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Письмо и отчёт",
+      "topic": "Письмо и отчёт",
+      "communicative_goal": "формулировать структурированный официальный текст и устное резюме.",
+      "grammar": [
+        "passive",
+        "nominalisation",
+        "formal register."
+      ],
+      "grammar_summary": "passive, nominalisation and formal register.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "формулировать структурированный официальный текст и устное резюме.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 98,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Интервью и подкаст",
+      "topic": "Интервью и подкаст",
+      "communicative_goal": "поддерживать длительный естественный разговор.",
+      "grammar": [
+        "ellipsis",
+        "substitution",
+        "discourse management."
+      ],
+      "grammar_summary": "ellipsis, substitution and discourse management.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "поддерживать длительный естественный разговор.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 99,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Подготовка к финалу",
+      "topic": "Подготовка к финалу",
+      "communicative_goal": "выявить и повторить оставшиеся слабые темы.",
+      "grammar": [
+        "интеграция всей программы B2."
+      ],
+      "grammar_summary": "интеграция всей программы B2.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "выявить и повторить оставшиеся слабые темы.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    },
+    {
+      "id": 100,
+      "cefr": "B2",
+      "world_id": 10,
+      "world": "Финальная экспедиция",
+      "title": "Финальная экспедиция B2",
+      "topic": "Финальная экспедиция B2",
+      "communicative_goal": "понять связное аудио, объяснить ситуацию, аргументировать позицию и дать развёрнутый голосовой ответ.",
+      "grammar": [
+        "комплексное применение пройденных конструкций."
+      ],
+      "grammar_summary": "комплексное применение пройденных конструкций.",
+      "vocabulary": [
+        "mediation",
+        "arts",
+        "future",
+        "persuasion",
+        "formal communication"
+      ],
+      "expected_outcome": "понять связное аудио, объяснить ситуацию, аргументировать позицию и дать развёрнутый голосовой ответ.",
+      "theme": "final",
+      "points_planned": 50,
+      "exercises_per_point": 5,
+      "content_status": "planned"
+    }
+  ]
+}

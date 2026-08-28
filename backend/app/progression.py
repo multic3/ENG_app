@@ -118,16 +118,24 @@ def get_xp_progress(xp: int) -> dict:
 
 
 def xp_reward_for_lesson(
-    level_id: int,
+    point_id: int,
 ) -> int:
-    if level_id < 1 or level_id > MAX_PLAYER_LEVEL:
+    from .game_engine import POINTS_PER_LOCATION, TOTAL_POINTS
+
+    if point_id < 1 or point_id > TOTAL_POINTS:
         raise ValueError(
-            "level_id must be between 1 and 100"
+            f"point_id must be between 1 and {TOTAL_POINTS}"
         )
 
-    if level_id == MAX_PLAYER_LEVEL:
+    if point_id == TOTAL_POINTS:
         return FINAL_BOSS_BONUS_XP
 
-    return xp_required_to_advance(
-        level_id
+    # Roughly one RPG level per location. Regular points split that location's
+    # XP requirement; every 50th point is a slightly larger boss reward.
+    player_band = min(
+        ((point_id - 1) // POINTS_PER_LOCATION) + 1,
+        MAX_PLAYER_LEVEL - 1,
     )
+    required = xp_required_to_advance(player_band)
+    base_reward = max(1, round(required / (POINTS_PER_LOCATION + 2)))
+    return base_reward * (3 if point_id % POINTS_PER_LOCATION == 0 else 1)

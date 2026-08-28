@@ -187,6 +187,10 @@ const document = {
 
     createElement() {
         return makeElement();
+    },
+
+    createElementNS() {
+        return makeElement();
     }
 };
 

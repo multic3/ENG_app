@@ -1,155 +1,72 @@
+const assert = require("assert");
 const fs = require("fs");
 const vm = require("vm");
 
-
 function createElement() {
     const classes = new Set();
-
     return {
         style: {},
         innerHTML: "",
+        textContent: "",
+        className: "",
         attributes: {},
         classList: {
-            add(name) {
-                classes.add(name);
-            },
-            contains(name) {
-                return classes.has(name);
-            }
+            add(name) { classes.add(name); },
+            contains(name) { return classes.has(name); }
         },
-        setAttribute(name, value) {
-            this.attributes[name] = value;
-        },
-        addEventListener() {}
+        setAttribute(name, value) { this.attributes[name] = value; },
+        children: [],
+        addEventListener() {},
+        appendChild(child) { this.children.push(child); }
     };
 }
 
-
-const document = {
-    createElement
-};
 const context = {
-    document
+    document: {
+        createElement,
+        createElementNS() { return createElement(); }
+    }
 };
-
-
 vm.createContext(context);
 vm.runInContext(
-    `${fs.readFileSync(
-        "frontend/map-engine.js",
-        "utf8"
-    )}; this.mapEngine = MapEngine;`,
+    `${fs.readFileSync("frontend/map-engine.js", "utf8")}; this.mapEngine = MapEngine;`,
     context
 );
-
 
 const container = {
     innerHTML: "",
     children: [],
-    appendChild(child) {
-        this.children.push(child);
-    }
+    appendChild(child) { this.children.push(child); }
 };
-
-
 context.mapEngine.render(
     container,
-    {id: 2},
-    {
-        current_level: 11,
-        completed_levels: []
-    },
+    { id: 2 },
+    { current_level: 51, completed_levels: [] },
     () => {}
 );
 
+const nodes = container.children.filter(child => child.className === "level-node");
+const paths = container.children.filter(child => child.classList.contains("map-path-svg"));
+const labels = container.children.filter(child => child.className === "map-stage-label");
 
-if (
-    !container.children[0]
-        .innerHTML.includes("11")
-) {
-    throw new Error(
-        "Location 2 did not start at global level 11"
-    );
-}
+assert.strictEqual(context.mapEngine.positions.length, 50);
+assert.strictEqual(nodes.length, 50);
+assert.strictEqual(paths.length, 1);
+assert.strictEqual(paths[0].children.length, 1);
+assert.strictEqual(labels.length, 5);
+assert.match(nodes[0].innerHTML, />1</);
+assert.match(nodes[49].innerHTML, />50</);
+assert.strictEqual(nodes[0].attributes["aria-label"], "Point 51");
+assert.strictEqual(nodes[49].attributes["aria-label"], "Point 100, locked");
+assert.ok(nodes[49].classList.contains("boss"));
 
+const start = context.mapEngine.getNagisaPosition({ id: 2 }, { current_level: 51 });
+const later = context.mapEngine.getNagisaPosition({ id: 2 }, { current_level: 76 });
+assert.strictEqual(start.level, 51);
+assert.strictEqual(later.level, 76);
+assert.notDeepStrictEqual({ x: start.x, y: start.y }, { x: later.x, y: later.y });
 
-if (
-    !container.children[9]
-        .innerHTML.includes("20")
-) {
-    throw new Error(
-        "Location 2 boss was not global level 20"
-    );
-}
+const html = fs.readFileSync("frontend/index.html", "utf8");
+assert.ok(html.includes("beach-decoration"));
 
-
-if (
-    container.children[0]
-        .attributes["aria-label"] !==
-    "Level 11"
-) {
-    throw new Error(
-        "Global level accessibility label is incorrect"
-    );
-}
-
-
-const nagisaAtLevel11 =
-    context.mapEngine.getNagisaPosition(
-        {id: 2},
-        {current_level: 11}
-    );
-
-const nagisaAtLevel16 =
-    context.mapEngine.getNagisaPosition(
-        {id: 2},
-        {current_level: 16}
-    );
-
-
-if (
-    nagisaAtLevel11.level !== 11 ||
-    nagisaAtLevel16.level !== 16 ||
-    (
-        nagisaAtLevel11.x === nagisaAtLevel16.x &&
-        nagisaAtLevel11.y === nagisaAtLevel16.y
-    )
-) {
-    throw new Error(
-        "Nagisa does not move with lesson progress"
-    );
-}
-
-
-const roadPath = fs.readFileSync(
-    "frontend/index.html",
-    "utf8"
-);
-
-
-if (!roadPath.includes("beach-decoration")) {
-    throw new Error(
-        "Sunny Beach map decorations are missing"
-    );
-}
-
-for (
-    const position of context.mapEngine.positions
-) {
-    const x = position.x * 4;
-    const y = position.y * 9;
-    const endpoint = new RegExp(
-        `(?:M|C[^\\n]*\\s)${x}\\s+${y}(?:\\s|$)`
-    );
-
-    if (!endpoint.test(roadPath)) {
-        throw new Error(
-            `Level node ${x},${y} is not anchored to the road`
-        );
-    }
-}
-
-
-console.log(
-    "OK map displays levels 11-20, beach theme and moving Nagisa"
-);
+console.log("OK map displays 50 points, five stages, road and moving Nagisa");

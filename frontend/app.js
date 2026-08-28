@@ -403,7 +403,7 @@ async function enterPlayerSession(
     openLocation(
         Math.ceil(
             state.game.progress
-                .current_level / 10
+                .current_level / 50
         )
     );
 
@@ -622,12 +622,12 @@ function renderLocation() {
     const startLevel =
         (
             (location.id - 1)
-            * 10
+            * 50
         ) + 1;
 
 
     const endLevel =
-        location.id * 10;
+        location.id * 50;
 
 
     const completed =
@@ -654,7 +654,7 @@ function renderLocation() {
 
 
     elements.locationProgress.textContent =
-        `${completed} / 10`;
+        `${completed} / 50`;
 
 
     elements.worldTitle.textContent =
@@ -678,11 +678,12 @@ function renderLocation() {
 
 
     const nextLocationStart =
-        (location.id * 10) + 1;
+        (location.id * 50) + 1;
 
 
     const nextUnlocked =
         nextLocation &&
+        nextLocation.content_status === "complete" &&
         currentLevel >=
         nextLocationStart;
 
@@ -719,6 +720,18 @@ function renderLocation() {
         "aria-label",
         `Nagisa is near level ${nagisaPosition.level}`
     );
+
+    const revealCurrentPoint = () => {
+        elements.mapNagisa.scrollIntoView?.({
+            block: "center",
+            behavior: "smooth"
+        });
+    };
+    if (typeof requestAnimationFrame === "function") {
+        requestAnimationFrame(revealCurrentPoint);
+    } else {
+        revealCurrentPoint();
+    }
 
 }
 
@@ -761,7 +774,7 @@ elements.nextLocation.onclick =
         const startLevel =
             (
                 state.currentLocationId
-                * 10
+                * 50
             ) + 1;
 
 
@@ -1093,6 +1106,13 @@ function renderLesson() {
         title
     );
 
+    if (step.review_for) {
+        const reviewBadge = document.createElement("div");
+        reviewBadge.className = "review-badge";
+        reviewBadge.textContent = "↻ Повторение прошлой ошибки";
+        elements.lessonCard.appendChild(reviewBadge);
+    }
+
 
     switch (
         step.type
@@ -1136,7 +1156,7 @@ function renderLesson() {
 
         case "speaking":
 
-            renderSpeaking(
+            renderSpeechExercise(
                 step
             );
 
@@ -1883,6 +1903,129 @@ function renderListening(
 /* ===================================
    SPEAKING
 =================================== */
+
+function renderSpeechExercise(step) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "speaking-box";
+
+    const question = document.createElement("div");
+    question.className = "lesson-question";
+    question.textContent = step.question;
+    makeTranslatable(question, step.question_translation);
+    wrapper.appendChild(question);
+
+    const settings = step.speech_settings || {};
+    if (step.phrase && settings.show_model_before_attempt !== false) {
+        const target = document.createElement("div");
+        target.className = "lesson-subtext";
+        target.textContent = step.phrase;
+        makeTranslatable(target, step.phrase_translation);
+        wrapper.appendChild(target);
+        wrapper.appendChild(createSpeechButton(step.phrase, "Hear phrase"));
+    }
+
+    const controls = document.createElement("div");
+    controls.className = "speech-controls";
+    const startButton = document.createElement("button");
+    startButton.className = "mic-button";
+    startButton.textContent = "🎙️ Start";
+    const stopButton = document.createElement("button");
+    stopButton.className = "option-button speech-stop";
+    stopButton.textContent = "Stop";
+    stopButton.disabled = true;
+    const retryButton = document.createElement("button");
+    retryButton.className = "option-button speech-retry hidden";
+    retryButton.textContent = "Record again";
+    controls.append(startButton, stopButton, retryButton);
+    wrapper.appendChild(controls);
+
+    const transcript = document.createElement("div");
+    transcript.className = "speaking-transcript";
+    transcript.textContent = "Press Start and speak. The app checks words and meaning, not pronunciation.";
+    wrapper.appendChild(transcript);
+
+    const checkButton = document.createElement("button");
+    checkButton.className = "primary-button hidden";
+    checkButton.textContent = "Check answer";
+    wrapper.appendChild(checkButton);
+    elements.lessonCard.appendChild(wrapper);
+
+    let spokenText = "";
+
+    if (!SpeechEngine.isSupported()) {
+        startButton.disabled = true;
+        transcript.textContent = "Voice recognition is unavailable on this device. Practice aloud and continue.";
+        const continueButton = document.createElement("button");
+        continueButton.className = "primary-button";
+        continueButton.textContent = "I practised aloud";
+        continueButton.onclick = () => {
+            if (!LessonEngine.skipCurrentStep()) return;
+            continueButton.disabled = true;
+            addExplanation(step, "Voice check skipped: this browser has no recognition provider.");
+            addNextButton();
+        };
+        wrapper.appendChild(continueButton);
+        return;
+    }
+
+    const startRecording = () => {
+        spokenText = "";
+        checkButton.classList.add("hidden");
+        retryButton.classList.add("hidden");
+        transcript.textContent = "Listening…";
+        SpeechEngine.start(settings, {
+            onStart: () => {
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                startButton.classList.add("recording");
+            },
+            onTranscript: text => {
+                spokenText = text;
+                transcript.textContent = text ? `“${text}”` : "Listening…";
+            },
+            onEnd: () => {
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                startButton.classList.remove("recording");
+                if (spokenText) {
+                    checkButton.classList.remove("hidden");
+                    retryButton.classList.remove("hidden");
+                }
+            },
+            onError: error => {
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                startButton.classList.remove("recording");
+                transcript.textContent = `Microphone error: ${error}`;
+                retryButton.classList.remove("hidden");
+            }
+        });
+    };
+
+    startButton.onclick = startRecording;
+    stopButton.onclick = () => SpeechEngine.stop();
+    retryButton.onclick = startRecording;
+    checkButton.onclick = async () => {
+        const result = SpeechEngine.evaluate(spokenText, step);
+        LessonEngine.answerSpeakingResult(result.correct);
+        startButton.disabled = true;
+        stopButton.disabled = true;
+        retryButton.disabled = true;
+        checkButton.disabled = true;
+        transcript.textContent = `“${spokenText}” — ${result.message}`;
+        if (result.correct) {
+            showNagisaCorrect();
+            playCorrectSound();
+            addExplanation(step, result.message);
+            addNextButton();
+        } else {
+            showNagisaWrong();
+            await spendHeart();
+            addExplanation(step, result.message);
+            addCorrectionTask(step.phrase || step.accepted_answers?.[0] || "Please try again");
+        }
+    };
+}
 
 function renderSpeaking(
     step
@@ -2652,7 +2795,13 @@ async function completeCurrentLevel() {
             await apiFetch(
                 `/api/levels/${state.currentLevel.id}/complete`,
                 {
-                    method: "POST"
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        attempts: LessonEngine.getAttempts()
+                    })
                 }
             );
 
@@ -2721,7 +2870,10 @@ async function completeBoss(
                                     result.correct,
 
                                 total_answers:
-                                    result.total
+                                    result.total,
+
+                                attempts:
+                                    LessonEngine.getAttempts()
                             }
                         )
                 }
@@ -3143,7 +3295,7 @@ function closeLesson() {
     const progressLocationId =
         Math.ceil(
             state.game.progress
-                .current_level / 10
+                .current_level / 50
         );
 
 

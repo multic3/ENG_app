@@ -10,6 +10,8 @@ const LessonEngine = {
 
     answered: false,
 
+    attempts: [],
+
 
     start(level) {
 
@@ -22,6 +24,8 @@ const LessonEngine = {
         this.totalAnswers = 0;
 
         this.answered = false;
+
+        this.attempts = [];
     },
 
 
@@ -83,6 +87,8 @@ const LessonEngine = {
             this.correctAnswers++;
         }
 
+        this.recordAttempt(success);
+
         return success;
     },
 
@@ -111,6 +117,8 @@ const LessonEngine = {
         if (success) {
             this.correctAnswers++;
         }
+
+        this.recordAttempt(success);
 
         return success;
     },
@@ -169,6 +177,8 @@ const LessonEngine = {
         }
 
         this.answered = true;
+
+        this.recordAttempt(false);
 
         return true;
     },
@@ -233,7 +243,41 @@ const LessonEngine = {
             this.correctAnswers++;
         }
 
+        this.recordAttempt(success);
+
         return success;
+    },
+
+
+    answerSpeakingResult(success) {
+        if (this.answered) {
+            return false;
+        }
+        this.answered = true;
+        this.totalAnswers++;
+        if (success) {
+            this.correctAnswers++;
+        }
+        this.recordAttempt(success);
+        return success;
+    },
+
+
+    recordAttempt(correct) {
+        const step = this.getCurrentStep() || {};
+        if (!step.id) {
+            return;
+        }
+        this.attempts.push({
+            exercise_id: step.id,
+            correct: Boolean(correct),
+            grammar_tags: step.grammar_tags || []
+        });
+    },
+
+
+    getAttempts() {
+        return this.attempts.map(attempt => ({ ...attempt }));
     },
 
 
